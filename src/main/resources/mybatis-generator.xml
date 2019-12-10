@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <context id="DB2Tables"    targetRuntime="MyBatis3">
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!--数据库链接地址账号密码-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://192.168.32.169:3306/wx_yiyuan"
+                        userId="root"
+                        password="123456" >
+        </jdbcConnection>
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        <!--生成Model类存放位置-->
+        <javaModelGenerator targetPackage="com.buba.hospital.Bean" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!--生成映射文件存放位置-->
+        <sqlMapGenerator targetPackage="Mapper" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!--生成Dao类存放位置-->
+        <!-- 客户端代码，生成易于使用的针对Model对象和XML配置文件 的代码
+                type="ANNOTATEDMAPPER",生成Java Model 和基于注解的Mapper对象
+                type="MIXEDMAPPER",生成基于注解的Java Model 和相应的Mapper对象
+                type="XMLMAPPER",生成SQLMap XML文件和独立的Mapper接口
+        -->
+        <!--mapper接口-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.buba.hospital.Mapper" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+        <!--生成对应表及类名-->
+       <!-- <table tableName="product_category"
+               domainObjectName="ProductCategory">
+            &lt;!&ndash;    enableCountByExample="false"
+                enableUpdateByExample="false"
+                enableDeleteByExample="false"
+                enableSelectByExample="false"
+                selectByExampleQueryId="false"&ndash;&gt;
+            <generatedKey column="id" sqlStatement="JDBC" identity="true"/>
+        </table>-->
+        <table schema="HisOrder"  tableName="his_order"></table>
+        <table schema="HisPayment"  tableName="his_payment"></table>
+        <table schema="SecArticleDic"  tableName="sec_article_dic"></table>
+        <table schema="SecConsultation"  tableName="sec_consultation"></table>
+        <table schema="SecDoctorAppointmenttime"  tableName="sec_doctor_appointmenttime"></table>
+        <table schema="SecDoctorAppointmenttimeTimeframe"  tableName="sec_doctor_appointmenttime_timeframe"></table>
+        <table schema="SecDoctorAssistant"  tableName="sec_doctor_assistant"></table>
+        <table schema="SecDoctorMultipoint"  tableName="sec_doctor_multipoint"></table>
+        <table schema="SecFirstDepartment"  tableName="sec_first_department"></table>
+        <table schema="SecHospital"  tableName="sec_hospital"></table>
+        <table schema="SecHospitalInfo"  tableName="sec_hospital_info"></table>
+        <table schema="SecHospitalNews"  tableName="sec_hospital_news"></table>
+        <table schema="SecPatient"  tableName="sec_patient"></table>
+        <table schema="SecPayWay"  tableName="sec_pay_way"></table>
+        <table schema="SecPayment"  tableName="sec_payment"></table>
+        <table schema="SecPic"  tableName="sec_pic"></table>
+        <table schema="SecReport"  tableName="sec_report"></table>
+        <table schema="SecRes"  tableName="sec_res"></table>
+        <table schema="SecReservation"  tableName="sec_reservation"></table>
+        <table schema="SecRoleRes"  tableName="sec_role_res"></table>
+        <table schema="SecSecondDepartment"  tableName="sec_second_department"></table>
+        <table schema="SecUser"  tableName="sec_user"></table>
+
+
+
+
+
+
+    </context>
+</generatorConfiguration>

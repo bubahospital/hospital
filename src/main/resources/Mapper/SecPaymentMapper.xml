@@ -1,0 +1,672 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.buba.hospital.Mapper.SecPaymentMapper">
+  <resultMap id="BaseResultMap" type="com.buba.hospital.Bean.SecPayment">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="disabled" jdbcType="BIT" property="disabled" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="order_id" jdbcType="VARCHAR" property="orderId" />
+    <result column="order_name" jdbcType="VARCHAR" property="orderName" />
+    <result column="patient_id" jdbcType="INTEGER" property="patientId" />
+    <result column="patient_medicalCardNumber" jdbcType="VARCHAR" property="patientMedicalcardnumber" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="price_type" jdbcType="VARCHAR" property="priceType" />
+    <result column="price_status" jdbcType="VARCHAR" property="priceStatus" />
+    <result column="price_time" jdbcType="TIMESTAMP" property="priceTime" />
+    <result column="file_addr" jdbcType="VARCHAR" property="fileAddr" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, status, disabled, createtime, order_id, order_name, patient_id, patient_medicalCardNumber, 
+    price, price_type, price_status, price_time, file_addr
+  </sql>
+  <select id="selectByExample" parameterType="com.buba.hospital.Bean.SecPaymentExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sec_payment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sec_payment
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sec_payment
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.buba.hospital.Bean.SecPaymentExample">
+    delete from sec_payment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.buba.hospital.Bean.SecPayment">
+    insert into sec_payment (id, status, disabled, 
+      createtime, order_id, order_name, 
+      patient_id, patient_medicalCardNumber, price, 
+      price_type, price_status, price_time, 
+      file_addr)
+    values (#{id,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, #{disabled,jdbcType=BIT}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{orderId,jdbcType=VARCHAR}, #{orderName,jdbcType=VARCHAR}, 
+      #{patientId,jdbcType=INTEGER}, #{patientMedicalcardnumber,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, 
+      #{priceType,jdbcType=VARCHAR}, #{priceStatus,jdbcType=VARCHAR}, #{priceTime,jdbcType=TIMESTAMP}, 
+      #{fileAddr,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.buba.hospital.Bean.SecPayment">
+    insert into sec_payment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="disabled != null">
+        disabled,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="orderName != null">
+        order_name,
+      </if>
+      <if test="patientId != null">
+        patient_id,
+      </if>
+      <if test="patientMedicalcardnumber != null">
+        patient_medicalCardNumber,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="priceType != null">
+        price_type,
+      </if>
+      <if test="priceStatus != null">
+        price_status,
+      </if>
+      <if test="priceTime != null">
+        price_time,
+      </if>
+      <if test="fileAddr != null">
+        file_addr,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="disabled != null">
+        #{disabled,jdbcType=BIT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderName != null">
+        #{orderName,jdbcType=VARCHAR},
+      </if>
+      <if test="patientId != null">
+        #{patientId,jdbcType=INTEGER},
+      </if>
+      <if test="patientMedicalcardnumber != null">
+        #{patientMedicalcardnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="priceType != null">
+        #{priceType,jdbcType=VARCHAR},
+      </if>
+      <if test="priceStatus != null">
+        #{priceStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="priceTime != null">
+        #{priceTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fileAddr != null">
+        #{fileAddr,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.buba.hospital.Bean.SecPaymentExample" resultType="java.lang.Integer">
+    select count(*) from sec_payment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sec_payment
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.disabled != null">
+        disabled = #{record.disabled,jdbcType=BIT},
+      </if>
+      <if test="record.createtime != null">
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orderId != null">
+        order_id = #{record.orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderName != null">
+        order_name = #{record.orderName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientId != null">
+        patient_id = #{record.patientId,jdbcType=INTEGER},
+      </if>
+      <if test="record.patientMedicalcardnumber != null">
+        patient_medicalCardNumber = #{record.patientMedicalcardnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=DOUBLE},
+      </if>
+      <if test="record.priceType != null">
+        price_type = #{record.priceType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priceStatus != null">
+        price_status = #{record.priceStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priceTime != null">
+        price_time = #{record.priceTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fileAddr != null">
+        file_addr = #{record.fileAddr,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sec_payment
+    set id = #{record.id,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=VARCHAR},
+      disabled = #{record.disabled,jdbcType=BIT},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      order_id = #{record.orderId,jdbcType=VARCHAR},
+      order_name = #{record.orderName,jdbcType=VARCHAR},
+      patient_id = #{record.patientId,jdbcType=INTEGER},
+      patient_medicalCardNumber = #{record.patientMedicalcardnumber,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=DOUBLE},
+      price_type = #{record.priceType,jdbcType=VARCHAR},
+      price_status = #{record.priceStatus,jdbcType=VARCHAR},
+      price_time = #{record.priceTime,jdbcType=TIMESTAMP},
+      file_addr = #{record.fileAddr,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.buba.hospital.Bean.SecPayment">
+    update sec_payment
+    <set>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="disabled != null">
+        disabled = #{disabled,jdbcType=BIT},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderName != null">
+        order_name = #{orderName,jdbcType=VARCHAR},
+      </if>
+      <if test="patientId != null">
+        patient_id = #{patientId,jdbcType=INTEGER},
+      </if>
+      <if test="patientMedicalcardnumber != null">
+        patient_medicalCardNumber = #{patientMedicalcardnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="priceType != null">
+        price_type = #{priceType,jdbcType=VARCHAR},
+      </if>
+      <if test="priceStatus != null">
+        price_status = #{priceStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="priceTime != null">
+        price_time = #{priceTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fileAddr != null">
+        file_addr = #{fileAddr,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.buba.hospital.Bean.SecPayment">
+    update sec_payment
+    set status = #{status,jdbcType=VARCHAR},
+      disabled = #{disabled,jdbcType=BIT},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      order_id = #{orderId,jdbcType=VARCHAR},
+      order_name = #{orderName,jdbcType=VARCHAR},
+      patient_id = #{patientId,jdbcType=INTEGER},
+      patient_medicalCardNumber = #{patientMedicalcardnumber,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DOUBLE},
+      price_type = #{priceType,jdbcType=VARCHAR},
+      price_status = #{priceStatus,jdbcType=VARCHAR},
+      price_time = #{priceTime,jdbcType=TIMESTAMP},
+      file_addr = #{fileAddr,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.buba.hospital.Bean.SecPayment">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="disabled" jdbcType="BIT" property="disabled" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="order_id" jdbcType="VARCHAR" property="orderId" />
+    <result column="order_name" jdbcType="VARCHAR" property="orderName" />
+    <result column="patient_id" jdbcType="INTEGER" property="patientId" />
+    <result column="patient_medicalCardNumber" jdbcType="VARCHAR" property="patientMedicalcardnumber" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="price_type" jdbcType="VARCHAR" property="priceType" />
+    <result column="price_status" jdbcType="VARCHAR" property="priceStatus" />
+    <result column="price_time" jdbcType="TIMESTAMP" property="priceTime" />
+    <result column="file_addr" jdbcType="VARCHAR" property="fileAddr" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, status, disabled, createtime, order_id, order_name, patient_id, patient_medicalCardNumber, 
+    price, price_type, price_status, price_time, file_addr
+  </sql>
+  <select id="selectByExample" parameterType="com.buba.hospital.Bean.SecPaymentExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sec_payment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sec_payment
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sec_payment
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.buba.hospital.Bean.SecPaymentExample">
+    delete from sec_payment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.buba.hospital.Bean.SecPayment">
+    insert into sec_payment (id, status, disabled, 
+      createtime, order_id, order_name, 
+      patient_id, patient_medicalCardNumber, price, 
+      price_type, price_status, price_time, 
+      file_addr)
+    values (#{id,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, #{disabled,jdbcType=BIT}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{orderId,jdbcType=VARCHAR}, #{orderName,jdbcType=VARCHAR}, 
+      #{patientId,jdbcType=INTEGER}, #{patientMedicalcardnumber,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, 
+      #{priceType,jdbcType=VARCHAR}, #{priceStatus,jdbcType=VARCHAR}, #{priceTime,jdbcType=TIMESTAMP}, 
+      #{fileAddr,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.buba.hospital.Bean.SecPayment">
+    insert into sec_payment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="disabled != null">
+        disabled,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="orderName != null">
+        order_name,
+      </if>
+      <if test="patientId != null">
+        patient_id,
+      </if>
+      <if test="patientMedicalcardnumber != null">
+        patient_medicalCardNumber,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="priceType != null">
+        price_type,
+      </if>
+      <if test="priceStatus != null">
+        price_status,
+      </if>
+      <if test="priceTime != null">
+        price_time,
+      </if>
+      <if test="fileAddr != null">
+        file_addr,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="disabled != null">
+        #{disabled,jdbcType=BIT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderName != null">
+        #{orderName,jdbcType=VARCHAR},
+      </if>
+      <if test="patientId != null">
+        #{patientId,jdbcType=INTEGER},
+      </if>
+      <if test="patientMedicalcardnumber != null">
+        #{patientMedicalcardnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="priceType != null">
+        #{priceType,jdbcType=VARCHAR},
+      </if>
+      <if test="priceStatus != null">
+        #{priceStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="priceTime != null">
+        #{priceTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fileAddr != null">
+        #{fileAddr,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.buba.hospital.Bean.SecPaymentExample" resultType="java.lang.Integer">
+    select count(*) from sec_payment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sec_payment
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.disabled != null">
+        disabled = #{record.disabled,jdbcType=BIT},
+      </if>
+      <if test="record.createtime != null">
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orderId != null">
+        order_id = #{record.orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderName != null">
+        order_name = #{record.orderName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientId != null">
+        patient_id = #{record.patientId,jdbcType=INTEGER},
+      </if>
+      <if test="record.patientMedicalcardnumber != null">
+        patient_medicalCardNumber = #{record.patientMedicalcardnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=DOUBLE},
+      </if>
+      <if test="record.priceType != null">
+        price_type = #{record.priceType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priceStatus != null">
+        price_status = #{record.priceStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priceTime != null">
+        price_time = #{record.priceTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fileAddr != null">
+        file_addr = #{record.fileAddr,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sec_payment
+    set id = #{record.id,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=VARCHAR},
+      disabled = #{record.disabled,jdbcType=BIT},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      order_id = #{record.orderId,jdbcType=VARCHAR},
+      order_name = #{record.orderName,jdbcType=VARCHAR},
+      patient_id = #{record.patientId,jdbcType=INTEGER},
+      patient_medicalCardNumber = #{record.patientMedicalcardnumber,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=DOUBLE},
+      price_type = #{record.priceType,jdbcType=VARCHAR},
+      price_status = #{record.priceStatus,jdbcType=VARCHAR},
+      price_time = #{record.priceTime,jdbcType=TIMESTAMP},
+      file_addr = #{record.fileAddr,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.buba.hospital.Bean.SecPayment">
+    update sec_payment
+    <set>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="disabled != null">
+        disabled = #{disabled,jdbcType=BIT},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderName != null">
+        order_name = #{orderName,jdbcType=VARCHAR},
+      </if>
+      <if test="patientId != null">
+        patient_id = #{patientId,jdbcType=INTEGER},
+      </if>
+      <if test="patientMedicalcardnumber != null">
+        patient_medicalCardNumber = #{patientMedicalcardnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="priceType != null">
+        price_type = #{priceType,jdbcType=VARCHAR},
+      </if>
+      <if test="priceStatus != null">
+        price_status = #{priceStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="priceTime != null">
+        price_time = #{priceTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fileAddr != null">
+        file_addr = #{fileAddr,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.buba.hospital.Bean.SecPayment">
+    update sec_payment
+    set status = #{status,jdbcType=VARCHAR},
+      disabled = #{disabled,jdbcType=BIT},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      order_id = #{orderId,jdbcType=VARCHAR},
+      order_name = #{orderName,jdbcType=VARCHAR},
+      patient_id = #{patientId,jdbcType=INTEGER},
+      patient_medicalCardNumber = #{patientMedicalcardnumber,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DOUBLE},
+      price_type = #{priceType,jdbcType=VARCHAR},
+      price_status = #{priceStatus,jdbcType=VARCHAR},
+      price_time = #{priceTime,jdbcType=TIMESTAMP},
+      file_addr = #{fileAddr,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
