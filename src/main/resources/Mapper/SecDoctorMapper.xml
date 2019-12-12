@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.buba.hospital.Mapper.SecDoctorMapper">
+    <!--List<SecDoctor> findDoctor(String deptId);-->
+    <select id="findDoctor" resultType="com.buba.hospital.Bean.SecDoctor">
+       select * from sec_doctor sd,sec_rank_dic srd,sec_doctor_multipoint sdm,sec_first_department sfd where
+sd.rank=srd.rank_code and sd.id=sdm.doctor_id  and sfd.id=sdm.department_id and sfd.id=#{deptId}
+    </select>
+    <!--SecDoctor huoquaddress(String id);-->
+    <select id="huoquaddress" resultType="com.buba.hospital.Bean.SecDoctor">
+        select * from sec_doctor sd,sec_doctor_multipoint sdm, sec_hospital sh where sd.id=sdm.doctor_id and sdm.hospital_id=sh.id and sd.id=#{id}
+    </select>
+</mapper>

@@ -46,28 +46,7 @@
                 selectByExampleQueryId="false"&ndash;&gt;
             <generatedKey column="id" sqlStatement="JDBC" identity="true"/>
         </table>-->
-        <table schema="HisOrder"  tableName="his_order"></table>
-        <table schema="HisPayment"  tableName="his_payment"></table>
-        <table schema="SecArticleDic"  tableName="sec_article_dic"></table>
-        <table schema="SecConsultation"  tableName="sec_consultation"></table>
-        <table schema="SecDoctorAppointmenttime"  tableName="sec_doctor_appointmenttime"></table>
-        <table schema="SecDoctorAppointmenttimeTimeframe"  tableName="sec_doctor_appointmenttime_timeframe"></table>
-        <table schema="SecDoctorAssistant"  tableName="sec_doctor_assistant"></table>
-        <table schema="SecDoctorMultipoint"  tableName="sec_doctor_multipoint"></table>
-        <table schema="SecFirstDepartment"  tableName="sec_first_department"></table>
-        <table schema="SecHospital"  tableName="sec_hospital"></table>
-        <table schema="SecHospitalInfo"  tableName="sec_hospital_info"></table>
-        <table schema="SecHospitalNews"  tableName="sec_hospital_news"></table>
-        <table schema="SecPatient"  tableName="sec_patient"></table>
-        <table schema="SecPayWay"  tableName="sec_pay_way"></table>
-        <table schema="SecPayment"  tableName="sec_payment"></table>
-        <table schema="SecPic"  tableName="sec_pic"></table>
-        <table schema="SecReport"  tableName="sec_report"></table>
-        <table schema="SecRes"  tableName="sec_res"></table>
-        <table schema="SecReservation"  tableName="sec_reservation"></table>
-        <table schema="SecRoleRes"  tableName="sec_role_res"></table>
-        <table schema="SecSecondDepartment"  tableName="sec_second_department"></table>
-        <table schema="SecUser"  tableName="sec_user"></table>
+        <table schema="SecDoctor"  tableName="sec_doctor"></table>
 
 
 
