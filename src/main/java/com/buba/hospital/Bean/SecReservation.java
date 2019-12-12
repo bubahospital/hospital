@@ -17,7 +17,7 @@ public class SecReservation {
 
     private Integer hospitalId;
 
-    private String info;
+    private String timeframeId;
 
     private Integer departmentId;
 
@@ -89,12 +89,12 @@ public class SecReservation {
         this.hospitalId = hospitalId;
     }
 
-    public String getInfo() {
-        return info;
+    public String getTimeframeId() {
+        return timeframeId;
     }
 
-    public void setInfo(String info) {
-        this.info = info == null ? null : info.trim();
+    public void setTimeframeId(String timeframeId) {
+        this.timeframeId = timeframeId;
     }
 
     public Integer getDepartmentId() {

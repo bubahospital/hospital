@@ -11,11 +11,11 @@ public class SecHospitalInfo {
 
     private Date createtime;
 
-    private Integer hospitalId;
+    private Integer newId;
 
     private Integer sequence;
 
-    private String hospitalInfo;
+    private String newInfo;
 
     public Integer getId() {
         return id;
@@ -49,13 +49,6 @@ public class SecHospitalInfo {
         this.createtime = createtime;
     }
 
-    public Integer getHospitalId() {
-        return hospitalId;
-    }
-
-    public void setHospitalId(Integer hospitalId) {
-        this.hospitalId = hospitalId;
-    }
 
     public Integer getSequence() {
         return sequence;
@@ -65,11 +58,20 @@ public class SecHospitalInfo {
         this.sequence = sequence;
     }
 
-    public String getHospitalInfo() {
-        return hospitalInfo;
+
+    public Integer getNewId() {
+        return newId;
     }
 
-    public void setHospitalInfo(String hospitalInfo) {
-        this.hospitalInfo = hospitalInfo == null ? null : hospitalInfo.trim();
+    public void setNewId(Integer newId) {
+        this.newId = newId;
+    }
+
+    public String getNewInfo() {
+        return newInfo;
+    }
+
+    public void setNewInfo(String newInfo) {
+        this.newInfo = newInfo;
     }
 }

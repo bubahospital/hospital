@@ -17,12 +17,14 @@ public class DoctorController {
     @Autowired
     private DoctorService doctorService;
 
+    //查询医生信息
     @RequestMapping("appointment")
     public List<SecDoctor> appointment(String deptId){
         List<SecDoctor> list=doctorService.findDoctor(deptId);
         return list;
     }
 
+    //获取医生就诊地址
     @RequestMapping("huoquaddress")
     public SecDoctor huoquaddress(String id){
         return doctorService.huoquaddress(id);
