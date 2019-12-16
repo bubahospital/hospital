@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.buba.hospital.Mapper.HospitalMapper">
+   <!-- List<SecSecondDepartment> getSecondDepartmentById(Integer hospitalId);-->
+    <select id="getSecondDepartmentById" resultType="com.buba.hospital.Bean.SecSecondDepartment">
+        SELECT
+            sec_second_department.*
+        FROM
+            sec_second_department
+            LEFT JOIN sec_first_department ON sec_second_department.first_department_id = sec_first_department.id
+        WHERE
+            hospital_id = #{hospitalId}
+
+    </select>
+</mapper>

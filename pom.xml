@@ -114,11 +114,14 @@
             <artifactId>httpclient</artifactId>
             <version>4.5.3</version>
         </dependency>
-
-
-
-
-
+        <!-- 短信验证 -->
+        <dependency>
+            <groupId>xxx</groupId>
+            <artifactId>yyy</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/lib/CCP_REST_SMS_SDK_JAVA_v2.6.3r.jar</systemPath>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

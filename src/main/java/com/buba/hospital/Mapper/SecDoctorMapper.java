@@ -1,5 +1,6 @@
 package com.buba.hospital.Mapper;
 
+
 import com.buba.hospital.Bean.SecDoctor;
 
 import java.util.List;

@@ -92,4 +92,19 @@ public class SecSecondDepartment {
     public void setSecondDepartmentCommont(String secondDepartmentCommont) {
         this.secondDepartmentCommont = secondDepartmentCommont == null ? null : secondDepartmentCommont.trim();
     }
+
+    @Override
+    public String toString() {
+        return "SecSecondDepartment{" +
+                "id=" + id +
+                ", status='" + status + '\'' +
+                ", disabled=" + disabled +
+                ", createtime=" + createtime +
+                ", firstDepartmentId=" + firstDepartmentId +
+                ", secondDepartmentName='" + secondDepartmentName + '\'' +
+                ", sequence=" + sequence +
+                ", secondDepartmentAddress='" + secondDepartmentAddress + '\'' +
+                ", secondDepartmentCommont='" + secondDepartmentCommont + '\'' +
+                '}';
+    }
 }
