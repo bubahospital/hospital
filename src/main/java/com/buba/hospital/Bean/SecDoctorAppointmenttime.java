@@ -1,5 +1,8 @@
 package com.buba.hospital.Bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class SecDoctorAppointmenttime {
@@ -8,16 +11,39 @@ public class SecDoctorAppointmenttime {
     private String status;
 
     private Boolean disabled;
-
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date createtime;
 
     private Integer hospitalId;
 
     private Integer doctorId;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date appointmentTime;
 
     private String appointmentStatus;
+
+    private String appointmentTimes;
+
+    private String week;
+
+
+    public String getWeek() {
+        return week;
+    }
+
+    public void setWeek(String week) {
+        this.week = week;
+    }
+
+    public String getAppointmentTimes() {
+        return appointmentTimes;
+    }
+
+    public void setAppointmentTimes(String appointmentTimes) {
+        this.appointmentTimes = appointmentTimes;
+    }
 
     public Integer getId() {
         return id;
@@ -81,5 +107,21 @@ public class SecDoctorAppointmenttime {
 
     public void setAppointmentStatus(String appointmentStatus) {
         this.appointmentStatus = appointmentStatus == null ? null : appointmentStatus.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "SecDoctorAppointmenttime{" +
+                "id=" + id +
+                ", status='" + status + '\'' +
+                ", disabled=" + disabled +
+                ", createtime=" + createtime +
+                ", hospitalId=" + hospitalId +
+                ", doctorId=" + doctorId +
+                ", appointmentTime=" + appointmentTime +
+                ", appointmentStatus='" + appointmentStatus + '\'' +
+                ", appointmentTimes='" + appointmentTimes + '\'' +
+                ", week='" + week + '\'' +
+                '}';
     }
 }
