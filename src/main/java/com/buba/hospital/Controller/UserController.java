@@ -25,6 +25,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    /*发送验证码*/
     @RequestMapping("sendCode")
     public Integer sendCode(String phone){
         Integer code=0;
@@ -35,6 +36,7 @@ public class UserController {
         }
         return code;
     }
+    /*登录成功查询登录人信息*/
     @RequestMapping("login")
     public SecUser login(String phone){
 

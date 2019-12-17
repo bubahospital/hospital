@@ -12,4 +12,8 @@
             hospital_id = #{hospitalId}
 
     </select>
+    <!--SecHospital getHospital(Integer hospitalId);-->
+    <select id="getHospital" resultType="com.buba.hospital.Bean.SecHospital">
+        select * from sec_hospital where id=#{hospitalId}
+    </select>
 </mapper>

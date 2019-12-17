@@ -1,4 +1,5 @@
 package com.buba.hospital.Controller;
+import com.buba.hospital.Bean.SecHospital;
 import com.buba.hospital.Bean.SecSecondDepartment;
 import com.buba.hospital.Service.DoctorService;
 import com.buba.hospital.Service.HospitalService;
@@ -34,8 +35,13 @@ public class HospitalController {
     @RequestMapping("getSecondDepartmentById")
     public List<SecSecondDepartment> getSecondDepartmentById(Integer hospitalId){
         List<SecSecondDepartment> repartment= hospitalService.getSecondDepartmentById(1);
-        System.out.println(repartment);
         return repartment;
+    }
+    @ResponseBody
+    @RequestMapping("getHospital")
+    public SecHospital getHospital(Integer hospitalId){
+        SecHospital hospital= hospitalService.getHospital(1);
+        return hospital;
     }
 
 

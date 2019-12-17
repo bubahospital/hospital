@@ -11,6 +11,8 @@ public class SecHospital {
 
     private Date createtime;
 
+    private String hospitalSort;
+
     private String hospitalName;
 
     private String hospitalAddress;
@@ -20,6 +22,14 @@ public class SecHospital {
     private Double longitude;
 
     private Double latitude;
+
+    public String getHospitalSort() {
+        return hospitalSort;
+    }
+
+    public void setHospitalSort(String hospitalSort) {
+        this.hospitalSort = hospitalSort;
+    }
 
     public Integer getId() {
         return id;
@@ -91,5 +101,21 @@ public class SecHospital {
 
     public void setLatitude(Double latitude) {
         this.latitude = latitude;
+    }
+
+    @Override
+    public String toString() {
+        return "SecHospital{" +
+                "id=" + id +
+                ", status='" + status + '\'' +
+                ", disabled=" + disabled +
+                ", createtime=" + createtime +
+                ", hospitalSort='" + hospitalSort + '\'' +
+                ", hospitalName='" + hospitalName + '\'' +
+                ", hospitalAddress='" + hospitalAddress + '\'' +
+                ", hospitalTel=" + hospitalTel +
+                ", longitude=" + longitude +
+                ", latitude=" + latitude +
+                '}';
     }
 }
