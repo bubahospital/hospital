@@ -92,4 +92,19 @@ public class SecDoctorAppointmenttimeTimeframe {
     public void setTimeframePeoplenum1(Integer timeframePeoplenum1) {
         this.timeframePeoplenum1 = timeframePeoplenum1;
     }
+
+    @Override
+    public String toString() {
+        return "SecDoctorAppointmenttimeTimeframe{" +
+                "id=" + id +
+                ", status='" + status + '\'' +
+                ", disabled=" + disabled +
+                ", createtime=" + createtime +
+                ", appointmenttimeId=" + appointmenttimeId +
+                ", timeframe='" + timeframe + '\'' +
+                ", timeframePeoplenum=" + timeframePeoplenum +
+                ", timeframeStatus='" + timeframeStatus + '\'' +
+                ", timeframePeoplenum1=" + timeframePeoplenum1 +
+                '}';
+    }
 }
