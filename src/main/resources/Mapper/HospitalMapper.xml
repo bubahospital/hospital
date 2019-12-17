@@ -16,4 +16,18 @@
     <select id="getHospital" resultType="com.buba.hospital.Bean.SecHospital">
         select * from sec_hospital where id=#{hospitalId}
     </select>
+    <!--List<SecPic> getSwiper(Integer hospitalId);-->
+    <select id="getSwiper" resultType="com.buba.hospital.Bean.SecPic">
+        SELECT
+            *
+        FROM
+            sec_pic
+        WHERE
+            obj_id =#{hospitalId}
+            AND obj_type = 'hospital'
+            AND type = 'focus'
+        ORDER BY
+            id DESC
+            LIMIT 3
+    </select>
 </mapper>

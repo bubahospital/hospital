@@ -1,4 +1,5 @@
 package com.buba.hospital.Controller;
+import com.buba.hospital.Bean.SecPatient;
 import com.buba.hospital.Bean.SecSecondDepartment;
 import com.buba.hospital.Bean.SecUser;
 import com.buba.hospital.Service.HospitalService;
@@ -42,6 +43,20 @@ public class UserController {
 
         SecUser user=userService.login(phone);
         return user;
+    }
+    /*添加就诊人*/
+    @RequestMapping("addPatient")
+    public boolean addPatient(SecPatient patient){
+
+        boolean b=userService.addPatient(patient);
+        return b;
+    }
+    /*根据所有用户查询关联的就诊人信息*/
+    @RequestMapping("getPatientList")
+    public List<SecPatient> getPatientList(Integer userId){
+
+        List<SecPatient> list=userService.getPatientList(userId);
+        return list;
     }
 
 

@@ -10,7 +10,7 @@
         </commentGenerator>
         <!--数据库链接地址账号密码-->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://192.168.32.169:3306/wx_yiyuan"
+                        connectionURL="jdbc:mysql://192.168.34.179:3306/hospital"
                         userId="root"
                         password="123456" >
         </jdbcConnection>
@@ -46,7 +46,7 @@
                 selectByExampleQueryId="false"&ndash;&gt;
             <generatedKey column="id" sqlStatement="JDBC" identity="true"/>
         </table>-->
-        <table schema="SecDoctor"  tableName="sec_doctor"></table>
+        <table schema="SecDoctor"  tableName="sec_patient"></table>
 
 
 

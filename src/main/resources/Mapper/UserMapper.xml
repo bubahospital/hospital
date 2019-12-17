@@ -5,4 +5,23 @@
     <select id="login" resultType="com.buba.hospital.Bean.SecUser">
         select * from sec_user where phone=#{phone}
     </select>
+   <!-- boolean addPatient(SecPatient patient);-->
+    <insert id="addPatient">
+        insert into sec_patient (id,
+      createtime, user_id, patient_name,
+      patient_tel, patient_idCard, patient_medicalCardNumber,
+      patient_healthCareCardNumber, patient_area,
+      patient_address, is_default
+      )
+    values (null,
+      now(), #{userId,jdbcType=INTEGER}, #{patientName,jdbcType=VARCHAR},
+      #{patientTel,jdbcType=VARCHAR}, #{patientIdcard,jdbcType=VARCHAR}, #{patientMedicalcardnumber,jdbcType=VARCHAR},
+      #{patientHealthcarecardnumber,jdbcType=VARCHAR}, #{patientArea,jdbcType=VARCHAR},
+      #{patientAddress,jdbcType=VARCHAR}, 0
+      )
+    </insert>
+   <!-- List<SecPatient> getPatientList(Integer userId);-->
+    <select id="getPatientList" resultType="com.buba.hospital.Bean.SecPatient">
+          select  * from sec_patient where user_id=#{userId}
+    </select>
 </mapper>

@@ -142,4 +142,24 @@ public class SecPatient {
     public void setMedicalcardBalance(Double medicalcardBalance) {
         this.medicalcardBalance = medicalcardBalance;
     }
+
+    @Override
+    public String toString() {
+        return "SecPatient{" +
+                "id=" + id +
+                ", status='" + status + '\'' +
+                ", disabled=" + disabled +
+                ", createtime=" + createtime +
+                ", userId=" + userId +
+                ", patientName='" + patientName + '\'' +
+                ", patientTel='" + patientTel + '\'' +
+                ", patientIdcard='" + patientIdcard + '\'' +
+                ", patientMedicalcardnumber='" + patientMedicalcardnumber + '\'' +
+                ", patientHealthcarecardnumber='" + patientHealthcarecardnumber + '\'' +
+                ", patientArea='" + patientArea + '\'' +
+                ", patientAddress='" + patientAddress + '\'' +
+                ", isDefault=" + isDefault +
+                ", medicalcardBalance=" + medicalcardBalance +
+                '}';
+    }
 }

@@ -1,6 +1,7 @@
 package com.buba.hospital.Service.impl;
 
 import com.buba.hospital.Bean.SecHospital;
+import com.buba.hospital.Bean.SecPic;
 import com.buba.hospital.Bean.SecSecondDepartment;
 import com.buba.hospital.Mapper.HospitalMapper;
 import com.buba.hospital.Mapper.SecDoctorMapper;
@@ -26,6 +27,12 @@ public class HospitalServiceImpl implements HospitalService {
     @Override
     public SecHospital getHospital(Integer hospitalId) {
         SecHospital hospital= hospitalMapper.getHospital(hospitalId);
+        return hospital;
+    }
+
+    @Override
+    public List<SecPic> getSwiper(Integer hospitalId) {
+        List<SecPic> hospital= hospitalMapper.getSwiper(hospitalId);
         return hospital;
     }
 }

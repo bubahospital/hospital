@@ -1,5 +1,6 @@
 package com.buba.hospital.Controller;
 import com.buba.hospital.Bean.SecHospital;
+import com.buba.hospital.Bean.SecPic;
 import com.buba.hospital.Bean.SecSecondDepartment;
 import com.buba.hospital.Service.DoctorService;
 import com.buba.hospital.Service.HospitalService;
@@ -37,10 +38,19 @@ public class HospitalController {
         List<SecSecondDepartment> repartment= hospitalService.getSecondDepartmentById(1);
         return repartment;
     }
+
+    /*根据医院id获取医院信息*/
     @ResponseBody
     @RequestMapping("getHospital")
     public SecHospital getHospital(Integer hospitalId){
         SecHospital hospital= hospitalService.getHospital(1);
+        return hospital;
+    }
+    /*根据医院id获取医院首页轮播图*/
+    @ResponseBody
+    @RequestMapping("getSwiper")
+    public List<SecPic> getSwiper(Integer hospitalId){
+        List<SecPic> hospital= hospitalService.getSwiper(hospitalId);
         return hospital;
     }
 
