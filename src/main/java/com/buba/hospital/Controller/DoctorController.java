@@ -1,8 +1,6 @@
 package com.buba.hospital.Controller;
 
-import com.buba.hospital.Bean.SecDoctor;
-import com.buba.hospital.Bean.SecDoctorAppointmenttime;
-import com.buba.hospital.Bean.SecDoctorAppointmenttimeTimeframe;
+import com.buba.hospital.Bean.*;
 import com.buba.hospital.Service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -127,4 +125,21 @@ public class DoctorController {
             return status;
         }
     }
+    //获取预约信息
+    @RequestMapping("findtime")
+    public Time findtime(Integer id,Integer apptimeId,Integer doctorId){
+        String time1=doctorService.findTime(id);
+        String time2=doctorService.findTime2(apptimeId);
+        String doctorName=doctorService.findDoctorName(doctorId);
+        String week=DoctorController.dateToWeek(time2);
+        Time t=new Time();
+        t.setYuyuetime(time1);
+        t.setYuyuetime1(time2);
+        t.setWeek(week);
+        t.setDoctorName(doctorName);
+        System.out.println(t);
+        return t;
+    }
+
+   
 }
