@@ -6,6 +6,7 @@ import com.buba.hospital.Mapper.UserMapper;
 import com.buba.hospital.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -46,5 +47,31 @@ public class UserServiceImpl implements UserService {
         List<SecPatient> list=userMapper.getPatientList(userId);
 
         return list;
+    }
+
+    @Override
+    public SecPatient getPatientById(Integer id) {
+        SecPatient patient=userMapper.getPatientById(id);
+        return patient;
+    }
+
+    @Override
+    public boolean updatePatient(SecPatient patient) {
+        boolean b=userMapper.updatePatient(patient);
+        return b;
+    }
+
+    @Override
+    public boolean deletePatient(Integer id) {
+        boolean b=userMapper.deletePatient(id);
+        return b;
+    }
+
+    @Override
+    @Transactional
+    public boolean updateIsDefault(Integer checkId, Integer uncheckId) {
+        boolean b1=userMapper.updateIsDefault0(checkId);
+        boolean b2=userMapper.updateIsDefault1(uncheckId);
+        return b1&b2;
     }
 }

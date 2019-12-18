@@ -58,6 +58,35 @@ public class UserController {
         List<SecPatient> list=userService.getPatientList(userId);
         return list;
     }
+    /*根据就诊人id查询就诊人信息*/
+    @RequestMapping("getPatientById")
+    public SecPatient getPatientById(Integer id){
+
+        SecPatient patient=userService.getPatientById(id);
+        return patient;
+    }
+    /*根据就诊人id查询就诊人信息*/
+    @RequestMapping("updatePatient")
+    public boolean updatePatient(SecPatient patient){
+        System.out.println(patient);
+        boolean b=userService.updatePatient(patient);
+        return b;
+    }
+    /*根据就诊人id删除绑定的就诊人信息*/
+    @RequestMapping("deletePatient")
+    public boolean deletePatient(Integer id){
+        System.out.println(id);
+        boolean b=userService.deletePatient(id);
+        return b;
+    }
+    /*改变用户的默认就诊人*/
+    @RequestMapping("updateIsDefault")
+    public boolean updateIsDefault(Integer checkId,Integer uncheckId){
+        System.out.println(checkId);
+        System.out.println(uncheckId);
+        boolean b=userService.updateIsDefault(checkId,uncheckId);
+        return b;
+    }
 
 
 

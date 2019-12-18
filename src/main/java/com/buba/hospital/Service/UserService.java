@@ -11,4 +11,12 @@ public interface UserService {
     boolean addPatient(SecPatient patient);
 
     List<SecPatient> getPatientList(Integer userId);
+
+    SecPatient getPatientById(Integer id);
+
+    boolean updatePatient(SecPatient patient);
+
+    boolean deletePatient(Integer id);
+
+    boolean updateIsDefault(Integer checkId, Integer uncheckId);
 }

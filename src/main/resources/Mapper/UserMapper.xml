@@ -24,4 +24,32 @@
     <select id="getPatientList" resultType="com.buba.hospital.Bean.SecPatient">
           select  * from sec_patient where user_id=#{userId}
     </select>
+    <!--SecPatient getPatientById(Integer id);-->
+    <select id="getPatientById" resultType="com.buba.hospital.Bean.SecPatient">
+      select * from sec_patient where id=#{id}
+    </select>
+    <!--boolean updatePatient(SecPatient patient);-->
+    <update id="updatePatient">
+        update sec_patient set patient_name=#{patientName},
+        patient_tel=#{patientTel},
+        patient_idCard=#{patientIdcard},
+        patient_area=#{patientArea},
+        patient_address=#{patientAddress},
+        patient_healthCareCardNumber=#{patientHealthcarecardnumber}
+        where id=#{id}
+    </update>
+   <!-- boolean deletePatient(Integer id);-->
+    <delete id="deletePatient">
+        delete from sec_patient where id=#{id}
+    </delete>
+
+   <!-- boolean updateIsDefault0(Integer checkId);-->
+    <update id="updateIsDefault0">
+      update sec_patient set  is_default=0 where id=#{checkId}
+    </update>
+    <!--boolean updateIsDefault1(Integer uncheckId);-->
+    <update id="updateIsDefault1">
+      update sec_patient set  is_default=1 where id=#{uncheckId}
+    </update>
+
 </mapper>
