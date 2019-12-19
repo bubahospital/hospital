@@ -56,4 +56,14 @@ sd.rank=srd.rank_code and sd.id=sdm.doctor_id  and sfd.id=sdm.department_id and 
         SELECT `name` from sec_doctor where id=#{doctorId}
     </select>
 
+    <!--List<SecPayWay> selectZhifuStyle();-->
+    <select id="selectZhifuStyle" resultType="com.buba.hospital.Bean.SecPayWay">
+        select * from sec_pay_way
+    </select>
+
+    <!--    int yuyuedingdan(@Param("secReservation") SecReservation secReservation,@Param("doctorId")  Integer doctorId,@Param("hospitalId")  Integer hospitalId);-->
+    <insert id="yuyuedingdan" >
+        insert into sec_reservation(order_id,order_status,hospital_id,timeframe_id,department_id,doctor_id,patient_id,price,price_type,price_time) values
+        (#{secReservation.orderId},1,#{hospitalId},#{secReservation.timeframeId},#{secReservation.departmentId},#{doctorId},#{secReservation.patientId},#{secReservation.price},#{secReservation.priceType},now())
+    </insert>
 </mapper>

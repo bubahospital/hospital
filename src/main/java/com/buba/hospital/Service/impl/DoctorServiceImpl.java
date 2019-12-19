@@ -1,8 +1,6 @@
 package com.buba.hospital.Service.impl;
 
-import com.buba.hospital.Bean.SecDoctor;
-import com.buba.hospital.Bean.SecDoctorAppointmenttime;
-import com.buba.hospital.Bean.SecDoctorAppointmenttimeTimeframe;
+import com.buba.hospital.Bean.*;
 import com.buba.hospital.Controller.DoctorController;
 import com.buba.hospital.Mapper.SecDoctorMapper;
 import com.buba.hospital.Service.DoctorService;
@@ -75,5 +73,15 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public String findDoctorName(Integer doctorId) {
         return secDoctorMapper.findDoctorName(doctorId);
+    }
+
+    @Override
+    public List<SecPayWay> selectZhifuStyle() {
+        return secDoctorMapper.selectZhifuStyle();
+    }
+
+    @Override
+    public int yuyuedingdan(SecReservation secReservation,Integer doctorId, Integer hospitalId) {
+        return secDoctorMapper.yuyuedingdan(secReservation,doctorId,hospitalId);
     }
 }

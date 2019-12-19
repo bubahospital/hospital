@@ -152,4 +152,26 @@ public class SecReservation {
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
+
+
+    @Override
+    public String toString() {
+        return "SecReservation{" +
+                "id=" + id +
+                ", status='" + status + '\'' +
+                ", disabled=" + disabled +
+                ", createtime=" + createtime +
+                ", orderId=" + orderId +
+                ", orderStatus='" + orderStatus + '\'' +
+                ", hospitalId=" + hospitalId +
+                ", timeframeId='" + timeframeId + '\'' +
+                ", departmentId=" + departmentId +
+                ", doctorId=" + doctorId +
+                ", patientId=" + patientId +
+                ", price=" + price +
+                ", priceType='" + priceType + '\'' +
+                ", priceTime=" + priceTime +
+                ", userId=" + userId +
+                '}';
+    }
 }
