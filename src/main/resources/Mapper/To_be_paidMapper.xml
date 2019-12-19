@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.buba.hospital.Mapper.To_be_paidMapper">
+
+    <!--  //就诊卡充值查询
+    List<HisOrder> getrechargeList(Integer id);-->
+    <select id="getrechargeList" resultType="com.buba.hospital.Bean.HisOrder">
+        SELECT
+			ho.id,
+			ho.order_num orderNum,
+			ho.order_name orderName,
+			ho.pay_money payMoney,
+		  spt.patient_medicalCardNumber patientMedicalCardNumber,
+		  spt.patient_name patientName,
+		  spt.createtime createtime1
+				FROM
+					his_order ho,
+				  sec_patient spt,
+			  sec_payment sp
+				WHERE
+					sp.patient_id = spt.id
+				AND sp.order_id = ho.id
+				AND ho.`status` = 0
+				AND ho.order_name = "就诊卡充值"
+				and spt.user_id=#{id}
+    </select>
+
+
+	<!-- // 预约挂号查询
+    List<HisOrder> getappointmentList(Integer id);-->
+	<select id="getappointmentList" resultType="com.buba.hospital.Bean.HisOrder">
+       SELECT
+			ho.id,
+			ho.order_num orderNum,
+			ho.order_name orderName,
+			sr.createtime createtime,
+			sh.hospital_name hospitalName,
+			sd. NAME NAME,
+			ho.pay_money payMoney,
+      sdat.timeframe timeframe,
+      sda.appointment_time appointmentTime
+		FROM
+			sec_reservation sr,
+			his_order ho,
+			sec_hospital sh,
+			sec_doctor sd,
+			sec_payment sp,
+			sec_patient spt,
+      sec_doctor_appointmenttime_timeframe sdat,
+      sec_doctor_appointmenttime sda
+		WHERE
+			sr.order_id = ho.id
+		AND sr.hospital_id = sh.id
+		AND sd.id = sr.doctor_id
+		AND sr.order_status = 0
+		AND ho.order_name = "预约挂号"
+		AND sr.user_id = #{id}
+		AND sp.patient_id = spt.id
+		AND sp.order_id = ho.id
+		AND spt.is_default = 0
+    and sr.timeframe_id=sdat.id
+    and sda.id=sdat.appointmenttime_id
+    </select>
+
+	<!-- // 在线咨询查询
+    List<HisOrder> getconsultationList(Integer id);
+   -->
+	<select id="getconsultationList" resultType="com.buba.hospital.Bean.HisOrder">
+SELECT
+			ho.id,
+			ho.order_num,
+			ho.order_name,
+			ho.pay_money,
+			sc.question_title questionTitle,
+			sp.patient_id patientId
+		FROM
+			his_order ho,
+			sec_consultation sc,
+			sec_payment sp,
+			sec_patient spt
+		WHERE
+			ho.`status` = 0
+		AND ho.id = sc.order_id
+		AND ho.order_name = "在线咨询"
+		AND sp.patient_id = spt.id
+		AND sp.order_id = ho.id
+		AND spt.is_default = 0
+        and spt.user_id=#{userid}
+    </select>
+
+
+	<!-- // 门诊缴费查询
+    List<HisOrder> getpaymentList(Integer id);-->
+
+	<select id="getpaymentList" resultType="com.buba.hospital.Bean.HisOrder">
+SELECT
+			ho.order_num orderNum,
+			ho.id,
+			ho.order_name orderName,
+			ho.pay_money payMoney,
+			sp.order_name spOrderName,
+			spt.patient_name patientName,
+			sp.createtime createtime,
+			sp.patient_id patientId
+		FROM
+			his_order ho,
+			sec_payment sp,
+			sec_patient spt
+		WHERE
+			sp.patient_id = spt.id
+		AND sp.order_id = ho.id
+		AND ho.`status` = 0
+		AND ho.order_name = "门诊缴费"
+		AND spt.user_id = #{userid}
+		AND spt.is_default = 0
+    </select>
+
+</mapper>

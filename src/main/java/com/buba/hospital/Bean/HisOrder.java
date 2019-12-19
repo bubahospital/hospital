@@ -1,5 +1,8 @@
 package com.buba.hospital.Bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class HisOrder {
@@ -24,6 +27,29 @@ public class HisOrder {
     private Double payMoney;
 
     private String payWay;
+
+    //就诊卡充值
+    private String patientMedicalCardNumber;//就诊卡号
+    private String patientName;//就诊人姓名
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date createtime1;//创建时间
+
+    //预约挂号
+    private String hospitalName;//医院name
+    private String name;//医生name
+
+    private String timeframe;//预约时间段
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date appointmentTime;//预约时间
+
+    //在线咨询
+    private String questionTitle;//咨询标题
+    private Integer patientId;//就诊人id
+
+    //门诊缴费
+    private String spOrderName;//缴费单名称
 
     public Integer getId() {
         return id;
@@ -111,5 +137,85 @@ public class HisOrder {
 
     public void setPayWay(String payWay) {
         this.payWay = payWay == null ? null : payWay.trim();
+    }
+
+    public String getPatientMedicalCardNumber() {
+        return patientMedicalCardNumber;
+    }
+
+    public void setPatientMedicalCardNumber(String patientMedicalCardNumber) {
+        this.patientMedicalCardNumber = patientMedicalCardNumber;
+    }
+
+    public String getPatientName() {
+        return patientName;
+    }
+
+    public void setPatientName(String patientName) {
+        this.patientName = patientName;
+    }
+
+    public Date getCreatetime1() {
+        return createtime1;
+    }
+
+    public void setCreatetime1(Date createtime1) {
+        this.createtime1 = createtime1;
+    }
+
+    public String getHospitalName() {
+        return hospitalName;
+    }
+
+    public void setHospitalName(String hospitalName) {
+        this.hospitalName = hospitalName;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getTimeframe() {
+        return timeframe;
+    }
+
+    public void setTimeframe(String timeframe) {
+        this.timeframe = timeframe;
+    }
+
+    public Date getAppointmentTime() {
+        return appointmentTime;
+    }
+
+    public void setAppointmentTime(Date appointmentTime) {
+        this.appointmentTime = appointmentTime;
+    }
+
+    public String getQuestionTitle() {
+        return questionTitle;
+    }
+
+    public void setQuestionTitle(String questionTitle) {
+        this.questionTitle = questionTitle;
+    }
+
+    public Integer getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(Integer patientId) {
+        this.patientId = patientId;
+    }
+
+    public String getSpOrderName() {
+        return spOrderName;
+    }
+
+    public void setSpOrderName(String spOrderName) {
+        this.spOrderName = spOrderName;
     }
 }
