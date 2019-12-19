@@ -1,9 +1,8 @@
 package com.buba.hospital.Controller;
 
-import com.buba.hospital.Bean.SecDoctor;
-import com.buba.hospital.Bean.SecDoctorAppointmenttime;
-import com.buba.hospital.Bean.SecDoctorAppointmenttimeTimeframe;
+import com.buba.hospital.Bean.*;
 import com.buba.hospital.Service.DoctorService;
+import com.buba.hospital.utils.JSONUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -127,4 +126,36 @@ public class DoctorController {
             return status;
         }
     }
+    //获取预约信息
+    @RequestMapping("findtime")
+    public Time findtime(Integer id,Integer apptimeId,Integer doctorId){
+        String time1=doctorService.findTime(id);
+        String time2=doctorService.findTime2(apptimeId);
+        String doctorName=doctorService.findDoctorName(doctorId);
+        String week=DoctorController.dateToWeek(time2);
+        Time t=new Time();
+        t.setYuyuetime(time1);
+        t.setYuyuetime1(time2);
+        t.setWeek(week);
+        t.setDoctorName(doctorName);
+        System.out.println(t);
+        return t;
+    }
+
+    //获取支付方式
+    @RequestMapping("selectZhifuStyle")
+    public List<SecPayWay> selectZhifuStyle(){
+        return doctorService.selectZhifuStyle();
+
+    }
+
+    //添加预约订单
+    @RequestMapping("yuyuedingdan")
+    public int yuyuedingdan(String yy,Integer doctorId, Integer hospitalId){
+        SecReservation secReservation=JSONUtils.json2Ojbect(yy,SecReservation.class);
+        int i=doctorService.yuyuedingdan(secReservation,doctorId,hospitalId);
+        return 1;
+
+    }
+   
 }

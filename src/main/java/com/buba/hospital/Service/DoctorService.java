@@ -1,8 +1,6 @@
 package com.buba.hospital.Service;
 
-import com.buba.hospital.Bean.SecDoctor;
-import com.buba.hospital.Bean.SecDoctorAppointmenttime;
-import com.buba.hospital.Bean.SecDoctorAppointmenttimeTimeframe;
+import com.buba.hospital.Bean.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,4 +23,14 @@ public interface DoctorService {
     Integer sum1(Integer id);
 
     Integer sum2(Integer id);
+
+    String findTime(Integer id);
+
+    String findTime2(Integer apptimeId);
+
+    String findDoctorName(Integer doctorId);
+
+    List<SecPayWay> selectZhifuStyle();
+
+    int yuyuedingdan(SecReservation secReservation,Integer doctorId, Integer hospitalId);
 }
