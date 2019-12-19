@@ -23,4 +23,6 @@ public interface UserMapper {
     boolean updateIsDefault0(Integer checkId);
 
     boolean updateIsDefault1(Integer uncheckId);
+
+    Integer getDefaultPatient(Integer userId);
 }

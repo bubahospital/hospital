@@ -19,4 +19,6 @@ public interface UserService {
     boolean deletePatient(Integer id);
 
     boolean updateIsDefault(Integer checkId, Integer uncheckId);
+
+    Integer getDefaultPatient(Integer userId);
 }

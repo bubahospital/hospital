@@ -5,6 +5,10 @@
     <select id="login" resultType="com.buba.hospital.Bean.SecUser">
         select * from sec_user where phone=#{phone}
     </select>
+   <!-- Integer getDefaultPatient(Integer userId);-->
+    <select id="getDefaultPatient" resultType="integer" >
+        select id from sec_patient where user_id=#{userId} and is_default=0
+    </select>
    <!-- boolean addPatient(SecPatient patient);-->
     <insert id="addPatient">
         insert into sec_patient (id,
@@ -17,7 +21,7 @@
       now(), #{userId,jdbcType=INTEGER}, #{patientName,jdbcType=VARCHAR},
       #{patientTel,jdbcType=VARCHAR}, #{patientIdcard,jdbcType=VARCHAR}, #{patientMedicalcardnumber,jdbcType=VARCHAR},
       #{patientHealthcarecardnumber,jdbcType=VARCHAR}, #{patientArea,jdbcType=VARCHAR},
-      #{patientAddress,jdbcType=VARCHAR}, 0
+      #{patientAddress,jdbcType=VARCHAR}, 1
       )
     </insert>
    <!-- List<SecPatient> getPatientList(Integer userId);-->
@@ -45,11 +49,11 @@
 
    <!-- boolean updateIsDefault0(Integer checkId);-->
     <update id="updateIsDefault0">
-      update sec_patient set  is_default=0 where id=#{checkId}
+      update sec_patient set  is_default=1 where id=#{checkId}
     </update>
     <!--boolean updateIsDefault1(Integer uncheckId);-->
     <update id="updateIsDefault1">
-      update sec_patient set  is_default=1 where id=#{uncheckId}
+      update sec_patient set  is_default=0 where id=#{uncheckId}
     </update>
 
 </mapper>

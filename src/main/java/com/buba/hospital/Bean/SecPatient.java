@@ -31,6 +31,8 @@ public class SecPatient {
 
     private Double medicalcardBalance;
 
+    private String picPath;
+
     public Integer getId() {
         return id;
     }
@@ -141,6 +143,14 @@ public class SecPatient {
 
     public void setMedicalcardBalance(Double medicalcardBalance) {
         this.medicalcardBalance = medicalcardBalance;
+    }
+
+    public Boolean getDefault() {
+        return isDefault;
+    }
+
+    public void setDefault(Boolean aDefault) {
+        isDefault = aDefault;
     }
 
     @Override

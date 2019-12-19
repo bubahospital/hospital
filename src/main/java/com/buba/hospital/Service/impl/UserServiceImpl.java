@@ -74,4 +74,10 @@ public class UserServiceImpl implements UserService {
         boolean b2=userMapper.updateIsDefault1(uncheckId);
         return b1&b2;
     }
+
+    @Override
+    public Integer getDefaultPatient(Integer userId) {
+        Integer patientId=userMapper.getDefaultPatient(userId);
+        return patientId;
+    }
 }

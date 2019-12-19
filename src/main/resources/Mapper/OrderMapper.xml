@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.buba.hospital.Mapper.OrderMapper">
+   <!-- List<SecConsultation> getOnlineOrder(Integer patientId);-->
+    <select id="getOnlineOrder" resultType="com.buba.hospital.Bean.SecConsultation">
+    SELECT
+	sec_consultation.*,
+	sec_doctor.price,his_order.order_num
+    FROM
+	sec_consultation,
+	sec_doctor,
+	his_order
+    WHERE
+	sec_consultation.doctor_id = sec_doctor.id
+	and sec_consultation.order_id=his_order.id
+    AND sec_consultation.patient_id = #{patientId}
+    </select>
+   <!-- SecConsultation getOrderDetailById(Integer id);-->
+    <select id="getOrderDetailById" resultType="com.buba.hospital.Bean.SecConsultation">
+        SELECT
+            sec_consultation.question_title,
+            sec_consultation.Illness_description,
+            sec_consultation.createtime,
+            sec_consultation.response_time,
+            sec_consultation.response,
+            sec_doctor.`name`,
+            sec_doctor.id,
+            sec_rank_dic.rank_name,
+            sec_hospital.hospital_name,
+            sec_first_department.department_name,
+            sec_pic.pic_path
+        FROM
+            sec_consultation
+            LEFT JOIN sec_doctor ON sec_consultation.response_id = sec_doctor.id
+
+            LEFT JOIN sec_pic ON sec_consultation.response_id = sec_pic.obj_id and sec_pic.obj_type="doctor"
+
+            LEFT JOIN sec_rank_dic ON sec_rank_dic.id = sec_doctor.rank
+
+            LEFT JOIN sec_doctor_multipoint ON sec_doctor_multipoint.doctor_id = sec_doctor.id
+
+            LEFT JOIN sec_hospital ON sec_hospital.id = sec_doctor_multipoint.hospital_id
+
+            LEFT JOIN sec_first_department ON sec_first_department.id = sec_doctor_multipoint.department_id
+        WHERE
+            sec_consultation.id = #{id}
+
+    </select>
+</mapper>

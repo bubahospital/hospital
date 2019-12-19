@@ -44,6 +44,13 @@ public class UserController {
         SecUser user=userService.login(phone);
         return user;
     }
+    /*登录成功查询登录人默认就诊人*/
+    @RequestMapping("getDefaultPatient")
+    public Integer getDefaultPatient(Integer userId){
+
+        Integer patientId=userService.getDefaultPatient(userId);
+        return patientId;
+    }
     /*添加就诊人*/
     @RequestMapping("addPatient")
     public boolean addPatient(SecPatient patient){
@@ -82,8 +89,6 @@ public class UserController {
     /*改变用户的默认就诊人*/
     @RequestMapping("updateIsDefault")
     public boolean updateIsDefault(Integer checkId,Integer uncheckId){
-        System.out.println(checkId);
-        System.out.println(uncheckId);
         boolean b=userService.updateIsDefault(checkId,uncheckId);
         return b;
     }
