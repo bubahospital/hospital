@@ -13,4 +13,8 @@ public interface To_be_paidService {
     List<HisOrder> getconsultationList(Integer id);
     // 门诊缴费查询
     List<HisOrder> getpaymentList(Integer id);
+    // 门诊缴费的所有状态
+    List<HisOrder> getoutpaymentListall(Integer id);
+    // 门诊缴费的已支付
+    List<HisOrder> getpaylistData(Integer id);
 }

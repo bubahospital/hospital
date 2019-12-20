@@ -38,5 +38,15 @@ public class To_be_paidServiceimpl implements To_be_paidService {
     public List<HisOrder> getpaymentList(Integer id) {
         return to_be_paidMapper.getpaymentList(id);
     }
+    // 门诊缴费的所有状态
+    @Override
+    public List<HisOrder> getoutpaymentListall(Integer id) {
+        return to_be_paidMapper.getoutpaymentListall(id);
+    }
+    // 门诊缴费的已支付
+    @Override
+    public List<HisOrder> getpaylistData(Integer id) {
+        return to_be_paidMapper.getpaylistData(id);
+    }
 
 }

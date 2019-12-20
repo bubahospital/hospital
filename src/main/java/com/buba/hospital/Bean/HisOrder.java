@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.List;
 
 public class HisOrder {
     private Integer id;
@@ -19,7 +20,8 @@ public class HisOrder {
     private Integer orderPlacer;
 
     private String status;
-
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date payStartTime;
 
     private Date refundStartTime;
@@ -50,6 +52,7 @@ public class HisOrder {
 
     //门诊缴费
     private String spOrderName;//缴费单名称
+    private List<HisPayment> hisPayments;//缴费单详情
 
     public Integer getId() {
         return id;
@@ -217,5 +220,13 @@ public class HisOrder {
 
     public void setSpOrderName(String spOrderName) {
         this.spOrderName = spOrderName;
+    }
+
+    public List<HisPayment> getHisPayments() {
+        return hisPayments;
+    }
+
+    public void setHisPayments(List<HisPayment> hisPayments) {
+        this.hisPayments = hisPayments;
     }
 }

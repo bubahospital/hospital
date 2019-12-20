@@ -44,4 +44,18 @@ public class To_be_paidController {
         List<HisOrder> repartment= to_be_paidService.getappointmentList(id);
         return repartment;
     }
+
+    // 门诊缴费的所有状态
+    @RequestMapping("/getoutpaymentListall")
+    public List<HisOrder> getoutpaymentListall(Integer id){
+        List<HisOrder> repartment= to_be_paidService.getoutpaymentListall(id);
+        return repartment;
+    }
+
+    // 门诊缴费的已支付
+    @RequestMapping("/getpaylistData")
+    public List<HisOrder> getpaylistData(Integer id){
+        List<HisOrder> repartment= to_be_paidService.getpaylistData(id);
+        return repartment;
+    }
 }

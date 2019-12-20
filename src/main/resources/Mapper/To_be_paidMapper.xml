@@ -115,4 +115,75 @@ SELECT
 		AND spt.is_default = 0
     </select>
 
+	<!-- // 门诊缴费的所有状态
+    List<HisOrder> getoutpaymentListall(Integer id);-->
+	<select id="getoutpaymentListall" resultType="com.buba.hospital.Bean.HisOrder">
+SELECT
+			ho.id,
+			ho.`status`,
+			ho.order_num orderNum,
+			ho.order_name orderName,
+			ho.pay_money payMoney,
+			sp.order_name spOrderName,
+			spt.patient_name patientName,
+			sp.createtime createtime,
+			sp.patient_id patientId
+		FROM
+			his_order ho,
+			sec_payment sp,
+			sec_patient spt
+		WHERE
+			sp.patient_id = spt.id
+		AND sp.order_id = ho.id
+		AND ho.order_name = "门诊缴费"
+		AND spt.user_id = #{id}
+		AND spt.is_default = 0
+		    </select>
+
+	<!-- // 门诊缴费的已支付
+    List<HisOrder> getpaylistData(Integer id);-->
+	<resultMap id="PaymentOrder" type="com.buba.hospital.Bean.HisOrder">
+		<id column="id" property="id"/>
+		<result column="orderNum" property="orderNum"/>
+		<result column="orderName" property="orderName"/>
+		<result column="payMoney" property="payMoney"/>
+		<result column="payWay" property="payWay"/>
+		<result column="payStartTime" property="payStartTime"/>
+		<result column="status" property="status"/>
+		<result column="spOrderName" property="spOrderName"/>
+		<result column="patientName" property="patientName"/>
+		<result column="createtime" property="createtime"/>
+		<collection property="hisPayments" ofType="com.buba.hospital.Bean.HisPayment">
+			<result column="name" property="name"/>
+			<result column="num" property="num"/>
+			<result column="price" property="price"/>
+		</collection>
+	</resultMap>
+	<select id="getpaylistData" resultMap="PaymentOrder">
+		SELECT
+					ho.order_num orderNum,
+					ho.order_name orderName,
+					ho.pay_money payMoney,
+					ho.pay_way payWay,
+					ho.pay_start_time payStartTime,
+				  sp.order_name spOrderName,
+				    spt.patient_name patientName,
+				    sp.createtime createtime,
+				    ho.id,
+				    hp.`name`,
+				    hp.num,
+				    hp.price,
+				    ho.`status`
+				FROM
+					his_order ho,
+				  sec_payment sp,
+				  sec_patient spt,
+			      his_payment hp
+				WHERE
+		    sp.patient_id=spt.id
+				AND sp.order_id = ho.id
+				AND ho.order_name = "门诊缴费"
+				and ho.id=#{id}
+	</select>
+
 </mapper>
