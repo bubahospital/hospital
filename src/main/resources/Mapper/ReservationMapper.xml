@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.buba.hospital.Mapper.ReservationMapper">
+   <!--List<ReservationVo> find_reservation(SecUser user);-->
+<select id="find_reservation" resultType="com.buba.hospital.Bean.ReservationVo">
+SELECT
+	r.id,
+	p.patient_name patientName,
+	p.patient_medicalCardNumber patientMedicalcardnumber,
+	p.patient_tel patientTel,
+	o.order_num orderNum,
+	o.order_name orderName,
+	o.pay_start_time payStartTime,
+	o.pay_money payMoney,
+	o.pay_way payWay,
+	o. STATUS orderStatus,
+	t.timeframe timeframe,
+	d. NAME doctorName,
+	h.hospital_name hospitalName,
+	f.department_name departmentName,
+	(
+		SELECT
+			sec_doctor_appointmenttime.appointment_time
+		FROM
+			sec_doctor_appointmenttime
+		WHERE
+			id IN (
+				SELECT
+					t.appointmenttime_id
+				FROM
+					sec_reservation r,
+					sec_doctor_appointmenttime_timeframe t
+				WHERE
+					r.timeframe_id = t.id
+			)
+	) AS appointmentTime
+FROM
+	sec_reservation r,
+	sec_user u,
+	sec_patient p,
+	his_order o,
+	sec_doctor_appointmenttime_timeframe t,
+	sec_doctor d,
+	sec_hospital h,
+	sec_first_department f
+WHERE
+	r.patient_id = p.id
+AND r.order_id = o.id
+AND o.order_name = '预约挂号'
+AND r.timeframe_id = t.id
+AND r.doctor_id = d.id
+AND r.hospital_id = h.id
+AND r.department_id = f.id
+AND r.user_id = u.id
+AND u.id = 1
+</select>
+	<!--List<ReservationVo> find_reservation_particulars(Integer id);-->
+
+	<select id="find_reservation_particulars" resultType="com.buba.hospital.Bean.ReservationVo">
+		SELECT
+			r.id,
+			p.patient_name patientName,
+			p.patient_medicalCardNumber patientMedicalcardnumber,
+			p.patient_tel patientTel,
+			o.order_num orderNum,
+			o.order_name orderName,
+			o.pay_start_time payStartTime,
+			o.refund_start_time refundStartTime,
+			o.pay_money payMoney,
+			o.pay_way payWay,
+			o. STATUS orderStatus,
+			t.timeframe timeframe,
+			d. NAME doctorName,
+			h.hospital_name hospitalName,
+			f.department_name departmentName,
+			(
+				SELECT
+					sec_doctor_appointmenttime.appointment_time
+				FROM
+					sec_doctor_appointmenttime
+				WHERE
+					id IN (
+						SELECT
+							t.appointmenttime_id
+						FROM
+							sec_reservation r,
+							sec_doctor_appointmenttime_timeframe t
+						WHERE
+							r.timeframe_id = t.id
+					)
+			) AS appointmentTime
+		FROM
+			sec_reservation r,
+			sec_user u,
+			sec_patient p,
+			his_order o,
+			sec_doctor_appointmenttime_timeframe t,
+			sec_doctor d,
+			sec_hospital h,
+			sec_first_department f
+		WHERE
+			r.patient_id = p.id
+		AND r.order_id = o.id
+		AND o.order_name = '预约挂号'
+		AND r.timeframe_id = t.id
+		AND r.doctor_id = d.id
+		AND r.hospital_id = h.id
+		AND r.department_id = f.id
+		AND r.user_id = u.id
+		AND r.id = #{id}
+	</select>
+	<!--boolean cancelReservation(Integer id);-->
+	<update id="cancelReservation">
+		UPDATE his_order o,
+		 sec_reservation r
+		SET o.`status` = 4,
+		 o.refund_start_time = NOW()
+		WHERE
+			o.id = r.order_id
+		AND r.id =#{id}
+	</update>
+<!--List<PaymentVo> findPaymentVo(SecUser user);-->
+	<select id="findPaymentVo" resultType="com.buba.hospital.Bean.PaymentVo">
+		select
+			o.id,
+			o.order_num orderNum,
+			o.pay_money payMoney,
+			o.`status` status,
+			o.pay_start_time payStartTime,
+			o.pay_way payWay,
+			o.createtime createtime,
+			p.patient_name patientName,
+			p.patient_medicalCardNumber patientMedicalCardNumber,
+			p.medicalCard_balance medicalCardBalance
+		FROM
+			his_order o,
+			sec_patient p
+		WHERE
+			o.order_placer = p.id
+		AND o.order_name = '就诊卡充值'
+		AND p.user_id=1
+	</select>
+	<!--PaymentVo find_payTheFees(Integer id);-->
+	<select id="find_payTheFees" resultType="com.buba.hospital.Bean.PaymentVo">
+		select
+			o.id,
+			o.order_num orderNum,
+			o.pay_money payMoney,
+			o.`status` status,
+			o.pay_start_time payStartTime,
+			o.pay_way payWay,
+			o.createtime createtime,
+			p.patient_name patientName,
+			p.patient_medicalCardNumber patientMedicalCardNumber,
+			p.medicalCard_balance medicalCardBalance
+		FROM
+			his_order o,
+			sec_patient p
+		WHERE
+			o.order_placer = p.id
+		AND o.order_name = '就诊卡充值'
+		AND p.user_id=1
+		and o.id=#{id}
+	</select>
+</mapper>
