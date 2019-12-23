@@ -76,7 +76,7 @@
           UPDATE sec_consultation SET sec_consultation.payment_status=0
           WHERE sec_consultation.id=#{id}
     </update>
-    <!--List<SecHospitalArticleVo> getArticleList(Integer hospitalId);-->
+    <!--List<SecHospitalArticleVo> getArticleList(Integer hospitalId, Integer articleType);-->
     <resultMap id="articleMap" type="com.buba.hospital.Bean.SecHospitalArticleVo" autoMapping="true">
         <id column="id" property="id"></id>
         <collection property="secPics" ofType="com.buba.hospital.Bean.SecPic">
@@ -96,10 +96,10 @@
         LEFT JOIN sec_pic ON sec_hospital_article.id = sec_pic.obj_id
         AND obj_type = 'article'
         WHERE
-          hospital_id =#{hospitalId} and article_type=2
+          hospital_id =#{hospitalId} and article_type=#{articleType}
     </select>
     <!--
-    List<SecHospitalArticleInfoVo> getArticleInfoList(int i);
+    List<SecHospitalArticleInfoVo> getArticleInfoList(Integer articleId, Integer articleType);
     -->
     <select id="getArticleInfoList" resultType="com.buba.hospital.Bean.SecHospitalArticleInfoVo">
             select sha.article_title articleTitle, shai.article_info info,shai.sequence from sec_hospital_article sha, sec_hospital_article_info shai

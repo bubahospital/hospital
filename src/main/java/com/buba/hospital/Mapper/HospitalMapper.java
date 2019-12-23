@@ -3,7 +3,6 @@ package com.buba.hospital.Mapper;
 import com.buba.hospital.Bean.*;
 import org.apache.ibatis.annotations.Param;
 
-
 import java.util.List;
 
 public interface HospitalMapper {
@@ -13,11 +12,11 @@ public interface HospitalMapper {
 
     List<SecPic> getSwiper(Integer hospitalId);
 
-    List<SecHospitalArticleVo> getArticleList(Integer hospitalId);
+    List<SecHospitalArticleInfoVo> getArticleImgList(Integer articleId);
 
     List<SecHospitalArticleInfoVo> getArticleInfoList(Integer articleId);
 
-    List<SecHospitalArticleInfoVo> getArticleImgList(Integer articleId);
+    List<SecHospitalArticleVo> getArticleList(@Param("hospitalId") Integer hospitalId, @Param("articleType") Integer articleType);
 
     //添加咨询表
     boolean addSecConsultation(@Param("doctor") SecDoctor doctor, @Param("userid") int userid, @Param("phone") String phone, @Param("biaoti") String biaoti, @Param("text") String text, @Param("fix") String fix, @Param("paymentStatus") int paymentStatus, @Param("orderId") int orderId);
