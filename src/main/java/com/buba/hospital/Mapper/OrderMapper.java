@@ -1,6 +1,7 @@
 package com.buba.hospital.Mapper;
 
 
+import com.buba.hospital.Bean.HisOrder;
 import com.buba.hospital.Bean.SecConsultation;
 import com.buba.hospital.Bean.SecPatient;
 import com.buba.hospital.Bean.SecUser;
@@ -13,4 +14,6 @@ public interface OrderMapper {
     List<SecConsultation> getOnlineOrder(Integer patientId);
 
     SecConsultation getOrderDetailById(Integer id);
+
+    HisOrder getHisOrderById(Integer id);
 }

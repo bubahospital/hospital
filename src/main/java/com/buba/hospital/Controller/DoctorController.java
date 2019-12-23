@@ -100,7 +100,7 @@ public class DoctorController {
             id=1;
         }
         List<SecDoctorAppointmenttimeTimeframe> list=doctorService.huoquappointmenttime(id);
-        System.out.println(list);
+
 
         return list;
     }

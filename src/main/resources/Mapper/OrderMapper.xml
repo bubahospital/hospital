@@ -18,11 +18,7 @@
    <!-- SecConsultation getOrderDetailById(Integer id);-->
     <select id="getOrderDetailById" resultType="com.buba.hospital.Bean.SecConsultation">
         SELECT
-            sec_consultation.question_title,
-            sec_consultation.Illness_description,
-            sec_consultation.createtime,
-            sec_consultation.response_time,
-            sec_consultation.response,
+            sec_consultation.*,
             sec_doctor.`name`,
             sec_doctor.id,
             sec_rank_dic.rank_name,
@@ -46,4 +42,21 @@
             sec_consultation.id = #{id}
 
     </select>
+    <!--HisOrder getHisOrderById(Integer id);-->
+    <select id="getHisOrderById" resultType="com.buba.hospital.Bean.HisOrder">
+
+      SELECT
+        his_order.*,
+        sec_doctor.`name`,
+        sec_doctor.price
+      FROM
+        his_order,
+        sec_doctor,
+        sec_consultation
+      WHERE
+        his_order.id = sec_consultation.order_id
+        AND sec_doctor.id = sec_consultation.doctor_id
+        AND sec_consultation.id =#{id}
+    </select>
+
 </mapper>

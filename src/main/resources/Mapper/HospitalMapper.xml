@@ -30,4 +30,41 @@
             id DESC
             LIMIT 3
     </select>
+    <!--List<SecHospitalArticleVo> getArticleList(Integer hospitalId);-->
+    <resultMap id="articleMap" type="com.buba.hospital.Bean.SecHospitalArticleVo" autoMapping="true">
+        <id column="id" property="id"></id>
+        <collection property="secPics" ofType="com.buba.hospital.Bean.SecPic">
+            <id column="picId" property="id"></id>
+            <result column="pic_path" property="picPath"></result>
+            <result column="sequence" property="sequence"></result>
+        </collection>
+    </resultMap>
+    <select id="getArticleList" resultMap="articleMap">
+        SELECT
+          sec_hospital_article.*,
+          sec_pic.id picId,
+          pic_path,
+          sequence
+        FROM
+          sec_hospital_article
+        LEFT JOIN sec_pic ON sec_hospital_article.id = sec_pic.obj_id
+        AND obj_type = 'article'
+        WHERE
+          hospital_id =#{hospitalId} and article_type=2
+    </select>
+    <!--
+    List<SecHospitalArticleInfoVo> getArticleInfoList(int i);
+    -->
+    <select id="getArticleInfoList" resultType="com.buba.hospital.Bean.SecHospitalArticleInfoVo">
+            select sha.article_title articleTitle, shai.article_info info,shai.sequence from sec_hospital_article sha, sec_hospital_article_info shai
+            where sha.id=shai.article_id
+            and sha.id=#{i}
+    </select>
+    <!--
+        List<SecHospitalArticleInfoVo> getArticleImgList(int i);
+        -->
+    <select id="getArticleImgList" resultType="com.buba.hospital.Bean.SecHospitalArticleInfoVo">
+            select pic_path info,sequence from sec_pic where obj_id=#{i}
+            and obj_type='article'
+    </select>
 </mapper>

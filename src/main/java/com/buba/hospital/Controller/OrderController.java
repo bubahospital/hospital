@@ -1,4 +1,5 @@
 package com.buba.hospital.Controller;
+import com.buba.hospital.Bean.HisOrder;
 import com.buba.hospital.Bean.SecConsultation;
 import com.buba.hospital.Bean.SecPatient;
 import com.buba.hospital.Bean.SecUser;
@@ -30,13 +31,23 @@ public class OrderController {
         List<SecConsultation> consultations= orderService.getOnlineOrder(patientId);
         return consultations;
     }
-    /*根据id查询在线咨询详情*/
+    /*根据id查询在线咨询订单详情*/
     @RequestMapping("getOrderDetailById")
     public SecConsultation getOrderDetailById(Integer id){
         SecConsultation consultation= orderService.getOrderDetailById(id);
         System.out.println(consultation);
         return consultation;
     }
+    /*根据id查询未支付订单详情*/
+    @RequestMapping("getHisOrderById")
+    public HisOrder getHisOrderById(Integer id){
+        System.out.println("orderId"+id);
+        HisOrder hisOrder= orderService.getHisOrderById(id);
+
+        return hisOrder;
+    }
+
+
 
 
 

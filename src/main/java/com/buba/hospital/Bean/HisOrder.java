@@ -10,7 +10,8 @@ public class HisOrder {
     private Integer id;
 
     private Boolean disabled;
-
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createtime;
 
     private String orderName;
@@ -20,15 +21,18 @@ public class HisOrder {
     private Integer orderPlacer;
 
     private String status;
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date payStartTime;
-
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date refundStartTime;
 
     private Double payMoney;
 
     private String payWay;
+
+    private Double price;//在线咨询价格
 
     //就诊卡充值
     private String patientMedicalCardNumber;//就诊卡号
@@ -220,13 +224,5 @@ public class HisOrder {
 
     public void setSpOrderName(String spOrderName) {
         this.spOrderName = spOrderName;
-    }
-
-    public List<HisPayment> getHisPayments() {
-        return hisPayments;
-    }
-
-    public void setHisPayments(List<HisPayment> hisPayments) {
-        this.hisPayments = hisPayments;
     }
 }

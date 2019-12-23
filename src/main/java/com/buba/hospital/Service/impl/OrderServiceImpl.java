@@ -1,5 +1,6 @@
 package com.buba.hospital.Service.impl;
 
+import com.buba.hospital.Bean.HisOrder;
 import com.buba.hospital.Bean.SecConsultation;
 import com.buba.hospital.Bean.SecPatient;
 import com.buba.hospital.Bean.SecUser;
@@ -37,5 +38,11 @@ public class OrderServiceImpl implements OrderService {
     public SecConsultation getOrderDetailById(Integer id) {
         SecConsultation consultation= orderMapper.getOrderDetailById(id);
         return consultation;
+    }
+
+    @Override
+    public HisOrder getHisOrderById(Integer id) {
+        HisOrder hisOrder= orderMapper.getHisOrderById(id);
+        return hisOrder;
     }
 }

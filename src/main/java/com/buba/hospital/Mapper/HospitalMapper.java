@@ -1,8 +1,6 @@
 package com.buba.hospital.Mapper;
 
-import com.buba.hospital.Bean.SecHospital;
-import com.buba.hospital.Bean.SecPic;
-import com.buba.hospital.Bean.SecSecondDepartment;
+import com.buba.hospital.Bean.*;
 
 import java.util.List;
 
@@ -12,4 +10,10 @@ public interface HospitalMapper {
     SecHospital getHospital(Integer hospitalId);
 
     List<SecPic> getSwiper(Integer hospitalId);
+
+    List<SecHospitalArticleVo> getArticleList(Integer hospitalId);
+
+    List<SecHospitalArticleInfoVo> getArticleInfoList(Integer articleId);
+
+    List<SecHospitalArticleInfoVo> getArticleImgList(Integer articleId);
 }

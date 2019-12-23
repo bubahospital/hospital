@@ -122,4 +122,22 @@ public class SecPic {
     public void setSequence(Integer sequence) {
         this.sequence = sequence;
     }
+
+    @Override
+    public String toString() {
+        return "SecPic{" +
+                "id=" + id +
+                ", status='" + status + '\'' +
+                ", disabled=" + disabled +
+                ", createtime=" + createtime +
+                ", type='" + type + '\'' +
+                ", objId=" + objId +
+                ", objType='" + objType + '\'' +
+                ", picName='" + picName + '\'' +
+                ", picSize='" + picSize + '\'' +
+                ", picPath='" + picPath + '\'' +
+                ", picInfo='" + picInfo + '\'' +
+                ", sequence=" + sequence +
+                '}';
+    }
 }

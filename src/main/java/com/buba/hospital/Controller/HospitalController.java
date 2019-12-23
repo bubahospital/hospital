@@ -1,7 +1,5 @@
 package com.buba.hospital.Controller;
-import com.buba.hospital.Bean.SecHospital;
-import com.buba.hospital.Bean.SecPic;
-import com.buba.hospital.Bean.SecSecondDepartment;
+import com.buba.hospital.Bean.*;
 import com.buba.hospital.Service.DoctorService;
 import com.buba.hospital.Service.HospitalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +50,22 @@ public class HospitalController {
     public List<SecPic> getSwiper(Integer hospitalId){
         List<SecPic> hospital= hospitalService.getSwiper(hospitalId);
         return hospital;
+    }
+    /*根据医院id获取医院动态列表*/
+    @ResponseBody
+    @RequestMapping("getArticleList")
+    public List<SecHospitalArticleVo> getArticleList(Integer hospitalId){
+        List<SecHospitalArticleVo> articleList= hospitalService.getArticleList(hospitalId);
+
+        return articleList;
+    }
+    /*根据医院id获取医院动态列表*/
+    @ResponseBody
+    @RequestMapping("getArticleInfo")
+    public List<SecHospitalArticleInfoVo> getArticleInfo(Integer articleId){
+        List<SecHospitalArticleInfoVo> articleInfo= hospitalService.getArticleInfo(articleId);
+
+        return articleInfo;
     }
 
 

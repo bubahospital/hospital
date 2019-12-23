@@ -1,9 +1,7 @@
 package com.buba.hospital.Service;
 
 
-import com.buba.hospital.Bean.SecHospital;
-import com.buba.hospital.Bean.SecPic;
-import com.buba.hospital.Bean.SecSecondDepartment;
+import com.buba.hospital.Bean.*;
 
 import java.util.List;
 
@@ -14,4 +12,8 @@ public interface HospitalService {
     SecHospital getHospital(Integer hospitalId);
 
     List<SecPic> getSwiper(Integer hospitalId);
+
+    List<SecHospitalArticleVo> getArticleList(Integer hospitalId);
+
+    List<SecHospitalArticleInfoVo> getArticleInfo(Integer articleId);
 }
