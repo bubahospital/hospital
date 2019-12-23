@@ -26,7 +26,6 @@ public class DoctorController {
     @RequestMapping("appointment")
     public List<SecDoctor> appointment(String deptId){
         List<SecDoctor> list=doctorService.findDoctor(deptId);
-        System.out.println(list);
         return list;
     }
 
