@@ -14,6 +14,7 @@ import java.util.Date;
 public class PaymentVo {
     private Integer id;
     private String orderNum;//订单号
+    private String orderName;//订单名称
     private Double payMoney;//支付金额
     private Integer status;//状态
     private String patientName;//就诊人
@@ -106,21 +107,12 @@ public class PaymentVo {
     public void setCreatetime(Date createtime) {
         this.createtime = createtime;
     }
-/*SELECT
-    o.id,
-    o.order_num orderNum,
-	o.pay_money payMoney,
-	o.`status` status,
-	o.pay_start_time payStartTime,
-	o.pay_way payWay,
-	p.patient_name patientName,
-	p.patient_medicalCardNumber patientMedicalCardNumber,
-	p.medicalCard_balance medicalCardBalance
-FROM
-	his_order o,
-	sec_patient p
-WHERE
-	o.order_placer = p.id
-AND o.order_name = '就诊卡充值'
-AND p.user_id=1*/
+
+    public String getOrderName() {
+        return orderName;
+    }
+
+    public void setOrderName(String orderName) {
+        this.orderName = orderName;
+    }
 }
