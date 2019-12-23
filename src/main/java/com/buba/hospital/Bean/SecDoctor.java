@@ -31,7 +31,7 @@ public class SecDoctor {
 
     private Boolean onlineconsultant;
 
-    private Boolean ispremium;
+    private Integer ispremium;
 
     private Double price;
 
@@ -40,6 +40,8 @@ public class SecDoctor {
     private String rankName;
 
     private String hospitalName;
+
+
 
     public String getHospitalName() {
         return hospitalName;
@@ -169,11 +171,11 @@ public class SecDoctor {
         this.onlineconsultant = onlineconsultant;
     }
 
-    public Boolean getIspremium() {
+    public Integer getIspremium() {
         return ispremium;
     }
 
-    public void setIspremium(Boolean ispremium) {
+    public void setIspremium(Integer ispremium) {
         this.ispremium = ispremium;
     }
 
