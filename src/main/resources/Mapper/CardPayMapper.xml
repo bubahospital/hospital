@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.buba.hospital.Mapper.CardPayMapper">
+    <!--//就诊人信息 SecPatient findPatientInfo(Integer patientId);-->
+    <select id="findPatientInfo" resultType="com.buba.hospital.Bean.SecPatient">
+        SELECT * FROM sec_patient WHERE id=#{patientId}
+    </select>
+</mapper>

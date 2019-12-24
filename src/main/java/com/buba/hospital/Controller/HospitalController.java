@@ -63,7 +63,7 @@ public class HospitalController {
     @RequestMapping("getArticleList")
     public List<SecHospitalArticleVo> getArticleList(Integer hospitalId,Integer articleType){
         List<SecHospitalArticleVo> articleList= hospitalService.getArticleList(hospitalId,articleType);
-        System.out.println(articleList);
+
         return articleList;
     }
     /*根据文章id获取文章详情*/
@@ -74,7 +74,14 @@ public class HospitalController {
         return articleInfo;
     }
 
+    /*根据医院id获取医院介绍*/
+    @ResponseBody
+    @RequestMapping("getHospitalIntroduce")
+    public List<SecHospitalArticleInfoVo> getHospitalIntroduce(Integer hospitalId,Integer articleType){
+        List<SecHospitalArticleInfoVo> articleInfo= hospitalService.getHospitalIntroduce(hospitalId,articleType);
 
+        return articleInfo;
+    }
     @ResponseBody
     @RequestMapping("/updateConsultationState")
     public boolean updateConsultationState(int id, HttpSession session){

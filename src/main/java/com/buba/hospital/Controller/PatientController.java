@@ -1,9 +1,14 @@
 package com.buba.hospital.Controller;
 
+import com.buba.hospital.Bean.HisOrder;
+import com.buba.hospital.Bean.PayHoPatVO;
+import com.buba.hospital.Bean.PayMentPOJO;
 import com.buba.hospital.Bean.SecPatient;
 import com.buba.hospital.Service.PatientService;
+import com.buba.hospital.utils.poiReadExcelInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -44,5 +49,36 @@ public class PatientController {
         }
 
 
+    }
+    //    JZ
+    @RequestMapping("/findNameAndCard")
+    @ResponseBody
+    public SecPatient findNameAndCard(Integer patientId) {
+        SecPatient patient = patientService.findNameAndCard(patientId);
+//        System.out.println(patient);
+        return patient;
+    }
+    @RequestMapping("/findOrderInfo")
+    @ResponseBody
+    public List<PayHoPatVO> findOrderInfo(Integer orderPlacer) {
+        List<PayHoPatVO> orderInfo = patientService.findOrderInfo(orderPlacer);
+//        System.out.println(orderInfo);
+        return orderInfo;
+    }
+    /*报表excel表返回前端显示*/
+    @RequestMapping("/payMentList")
+    @ResponseBody
+    public  List<PayMentPOJO>  payMentList(String url) {//用户id(获取session的id)
+        List<PayMentPOJO> list = poiReadExcelInfo.Res("D:\\kaoshi\\test.xlsx");//传的前端获取对应的地址（活的最后再改）
+//        System.out.println(list);
+        return  list;
+    }
+    //门诊缴费==支付方式页面：单号，名称， 金额
+    @RequestMapping("/findPayWays")
+    @ResponseBody
+    public HisOrder findPayWays(String orderNum) {
+        HisOrder ways = patientService.findPayWays(orderNum);
+        System.out.println(ways);
+        return ways;
     }
 }

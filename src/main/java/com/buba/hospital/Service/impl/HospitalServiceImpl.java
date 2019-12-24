@@ -36,6 +36,7 @@ public class HospitalServiceImpl implements HospitalService {
 
     @Override
     public List<SecHospitalArticleVo> getArticleList(Integer hospitalId, Integer articleType) {
+
         List<SecHospitalArticleVo> articleList= hospitalMapper.getArticleList(hospitalId,articleType);
         return articleList;
     }
@@ -57,6 +58,14 @@ public class HospitalServiceImpl implements HospitalService {
         Collections.sort(list);
 
         return list;
+    }
+    @Override
+    public List<SecHospitalArticleInfoVo> getHospitalIntroduce(Integer hospitalId, Integer articleType) {
+        List<SecHospitalArticleVo> articleList= hospitalMapper.getArticleList(hospitalId,articleType);
+        Integer articleId = articleList.get(0).getId();
+        List<SecHospitalArticleInfoVo> articleInfo = this.getArticleInfo(articleId);
+
+        return articleInfo;
     }
     //添加数据库  咨询表\订单表
     @Transactional
@@ -112,4 +121,6 @@ public class HospitalServiceImpl implements HospitalService {
     public boolean updateConsultationState(int id) {
         return hospitalMapper.updateConsultationState( id);
     }
+
+
 }

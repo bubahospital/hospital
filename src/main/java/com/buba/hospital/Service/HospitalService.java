@@ -22,4 +22,6 @@ public interface HospitalService {
     boolean addSecPicBySecConsultation(SecPic pic, int orderId);
     //根据咨询表id修改对应的支付状态 为已支付
     boolean updateConsultationState(int id);
+
+    List<SecHospitalArticleInfoVo> getHospitalIntroduce(Integer hospitalId, Integer articleType);
 }

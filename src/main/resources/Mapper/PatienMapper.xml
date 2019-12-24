@@ -45,6 +45,22 @@ UPDATE sec_patient
     <select id="selectUser" resultType="com.buba.hospital.Bean.SecPatient">
       select username patientName from  sec_user where id=#{id}
     </select>
+    <!--==================================JZ================================-->
 
+
+    <!--//门诊缴费==就诊人姓名、卡号 SecPatient findNameAndCard(Integer patientId);-->
+
+
+    <select resultType="com.buba.hospital.Bean.SecPatient" id="findNameAndCard">select * from sec_patient where id = #{patientId} </select>
+
+    <!--门诊缴费=根据就诊人查未支付的订单信息=单号、姓名、时间、缴费名、金额 List<PayHoPatVO> findOrderInfo(Integer orderPlacer);-->
+
+
+    <select resultType="com.buba.hospital.Bean.PayHoPatVO" id="findOrderInfo">SELECT ho.`order_num`,pat.`patient_name`,pay.`price_time`,hp.`name`,hp.`price`FROM sec_payment payLEFT JOIN his_order ho ON ho.id=pay.order_idLEFT JOIN sec_patient pat ON pat.id=pay.patient_idLEFT JOIN his_payment hp ON hp.`order_id`=ho.`id`WHERE ho.order_placer=#{orderPlacer} AND ho.status='0'AND ho.order_name='门诊缴费' </select>
+
+    <!--//门诊缴费==支付方式页面：单号，名称， 金额 HisOrder findPayWays(String orderNum);-->
+
+
+    <select resultType="com.buba.hospital.Bean.HisOrder" id="findPayWays"> select * from his_order where order_num=#{orderNum} </select>
 
 </mapper>
