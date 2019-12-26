@@ -39,7 +39,7 @@
       question_title, sex, Illness_description,
       payment_status, doctor_id, response_id,
       response, response_time)
-    values (null, 0, 0,
+    values (null, 1, 0,
       now(), #{orderId}, #{userid},
       #{biaoti}, #{fix}, #{text},
       #{paymentStatus}, #{doctor.id}, null,
@@ -73,8 +73,13 @@
   </insert>
     <!-- boolean updateConsultationState(int id);-->
     <update id="updateConsultationState">
-          UPDATE sec_consultation SET sec_consultation.payment_status=0
+          UPDATE sec_consultation SET sec_consultation.payment_status=1
           WHERE sec_consultation.id=#{id}
+    </update>
+    <!--  boolean updateOrderState(String orderNum);-->
+    <update id="updateOrderState">
+          UPDATE his_order SET status=1
+          WHERE order_num=#{id}
     </update>
     <!--List<SecHospitalArticleVo> getArticleList(Integer hospitalId, Integer articleType);-->
     <resultMap id="articleMap" type="com.buba.hospital.Bean.SecHospitalArticleVo" autoMapping="true">
