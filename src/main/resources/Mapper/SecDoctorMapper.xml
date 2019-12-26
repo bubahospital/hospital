@@ -1,6 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.buba.hospital.Mapper.SecDoctorMapper">
+    <!--
+    //获取医院所有科室信息
+    List<SecfirstDepartment> getAllDepartmentList(String hospitalId);
+    -->
+    <resultMap id="departmentMap" type="com.buba.hospital.Bean.SecFirstDepartment" autoMapping="true">
+        <id property="id" column="id"></id>
+        <result property="departmentName" column="departmentName"></result>
+        <collection property="secondList" ofType="com.buba.hospital.Bean.SecSecondDepartment" column="fdid">
+            <id property="id" column="sid"></id>
+            <result property="secondDepartmentName" column="secondDepartmentName"></result>
+            <collection property="doctorList" ofType="com.buba.hospital.Bean.SecDoctor" column="deid">
+                <id property="id" column="did"></id>
+                <result property="name" column="name"></result>
+                <result property="adeptat" column="adeptat"></result>
+                <result property="picPath" column="picPath"></result>
+                <result property="rank" column="rank"></result>
+                <result property="price" column="price"></result>
+            </collection>
+        </collection>
+    </resultMap>
+    <select id="getAllDepartmentList" resultMap="departmentMap">
+          SELECT sfd.id id,sfd.department_name departmentName,ssd.first_department_id fdid,ssd.id sid,ssd.second_department_name secondDepartmentName,
+  sd.id did, sdm.`department_id` deid ,sd.`name` NAME,sd.`adeptat`,sp.`pic_path` picPath,srd.`rank_name` rank,
+  sd.price
+        FROM  sec_first_department sfd
+        LEFT JOIN sec_second_department ssd ON sfd.id=ssd.first_department_id
+        LEFT JOIN sec_doctor_multipoint sdm ON sdm.`department_id`=ssd.`id`
+        LEFT JOIN sec_doctor sd ON sd.`id` = sdm.`doctor_id`
+        LEFT JOIN sec_pic sp ON sp.`obj_id` = sd.`id`
+        AND sp.`obj_type`='doctor' AND sp.`type`='head'
+        LEFT JOIN sec_rank_dic srd ON sd.`rank`=srd.`id`
+        WHERE sfd.hospital_id=#{hospitalId}
+        AND sdm.`hospital_id`=#{hospitalId}
+    </select>
     <!--List<SecDoctor> findDoctor(String deptId);-->
     <select id="findDoctor" resultType="com.buba.hospital.Bean.SecDoctor">
        select * from sec_doctor sd,sec_rank_dic srd,sec_doctor_multipoint sdm,sec_first_department sfd where
@@ -20,10 +54,23 @@ sd.rank=srd.rank_code and sd.id=sdm.doctor_id  and sfd.id=sdm.department_id and 
         select * from sec_doctor_appointmenttime where doctor_id=#{id}
     </select>
 
-    <!--List<SecDoctor> huoquadministrative(String deptname);-->
+    <!--查询同一科室下的其他医生
+    List<SecDoctor> huoquadministrative(Integer departmentId);-->
     <select id="huoquadministrative" resultType="com.buba.hospital.Bean.SecDoctor">
-        select * from sec_doctor sd,sec_rank_dic srd,sec_doctor_multipoint sdm,sec_first_department sfd where
-sd.rank=srd.rank_code and sd.id=sdm.doctor_id  and sfd.id=sdm.department_id and sfd.department_name=#{deptname}
+    SELECT
+        sec_doctor.id,sec_pic.pic_path,sec_doctor.`name`,sec_rank_dic.rank_name,sec_first_department.department_name,sec_doctor.adeptat
+    FROM
+        sec_first_department
+        LEFT JOIN sec_second_department ON sec_first_department.id = sec_second_department.first_department_id
+        LEFT JOIN sec_doctor_multipoint ON sec_doctor_multipoint.department_id = sec_second_department.id
+        LEFT JOIN sec_doctor ON sec_doctor.id = sec_doctor_multipoint.doctor_id
+        LEFT JOIN sec_rank_dic ON sec_rank_dic.rank_code = sec_doctor.rank
+        LEFT JOIN sec_pic  ON sec_pic.`obj_id` = sec_doctor.`id`
+        AND sec_pic.`obj_type` = 'doctor'
+        AND sec_pic.`type` = 'head'
+    WHERE
+        sec_second_department.id = #{departmentId}
+           AND sec_first_department.hospital_id=1
     </select>
 
     <!--List<SecDoctorAppointmenttimeTimeframe> huoquappointmenttime();-->
@@ -32,27 +79,27 @@ sd.rank=srd.rank_code and sd.id=sdm.doctor_id  and sfd.id=sdm.department_id and 
     </select>
 
     <!--String sum1(Integer id);-->
-    <select id="sum1" resultType="Integer">
+    <select id="sum1" resultType="java.lang.Integer">
         SELECT sum(timeframe_peoplenum) from sec_doctor_appointmenttime_timeframe where appointmenttime_id=#{id}
     </select>
 
     <!--String sum1(Integer id);-->
-    <select id="sum2" resultType="Integer">
+    <select id="sum2" resultType="java.lang.Integer">
         SELECT sum(timeframe_peoplenum1) from sec_doctor_appointmenttime_timeframe where appointmenttime_id=#{id}
     </select>
 
     <!-- String findTime(Integer id);-->
-    <select id="findTime" resultType="String">
+    <select id="findTime" resultType="java.lang.String">
         SELECT timeframe from sec_doctor_appointmenttime_timeframe where id=#{id}
     </select>
 
     <!--  String findTime2(Integer apptimeId);-->
-    <select id="findTime2" resultType="String">
+    <select id="findTime2" resultType="java.lang.String">
         SELECT appointment_time FROM sec_doctor_appointmenttime where id=#{apptimeId}
     </select>
 
     <!--String findDoctorName(Integer doctorId);-->
-    <select id="findDoctorName" resultType="String">
+    <select id="findDoctorName" resultType="java.lang.String">
         SELECT `name` from sec_doctor where id=#{doctorId}
     </select>
 
@@ -66,4 +113,8 @@ sd.rank=srd.rank_code and sd.id=sdm.doctor_id  and sfd.id=sdm.department_id and 
         insert into sec_reservation(order_id,order_status,hospital_id,timeframe_id,department_id,doctor_id,patient_id,price,price_type,price_time) values
         (#{secReservation.orderId},1,#{hospitalId},#{secReservation.timeframeId},#{secReservation.departmentId},#{doctorId},#{secReservation.patientId},#{secReservation.price},#{secReservation.priceType},now())
     </insert>
+   <!-- SecDoctor getDoctorDetailById(Integer doctorId);-->
+    <select id="getDoctorDetailById" resultType="com.buba.hospital.Bean.SecDoctor">
+        select *from sec_doctor where id=#{doctorId}
+    </select>
 </mapper>
