@@ -82,13 +82,14 @@ public class HospitalController {
 
         return articleInfo;
     }
+    //修改在线咨询支付状态为已支付
     @ResponseBody
     @RequestMapping("/updateConsultationState")
-    public boolean updateConsultationState(int id, HttpSession session){
+    public boolean updateConsultationState(int id,String orderNum, HttpSession session){
 
-        boolean list=hospitalService.updateConsultationState(id);
+        boolean b=hospitalService.updateConsultationState(id,orderNum);
 
-        return list;
+        return b;
     }
 
     @RequestMapping(value = "/api", method = RequestMethod.POST)
@@ -111,6 +112,7 @@ public class HospitalController {
         int userid=Integer.parseInt(jsonObject.getString("userid"));  //当前用户id
         System.out.println("用户id是："+userid);
         int state=Integer.parseInt(jsonObject.getString("state"));  //问题是付费还是免费
+        System.out.println("状态："+state);
         //根据前台传过来的付费状态，判断需不需要支付
         int paymentStatus=1;
         if(state==0){
@@ -158,7 +160,7 @@ public class HospitalController {
                 pic.setObjId(userid);
                 pic.setDisabled(false);
                 pic.setType("consultation");
-                pic.setObjType("患者");
+                pic.setObjType("sick");
                 pic.setPicPath(url);
                 pic.setPicName(extension);
                 pic.setStatus("1");

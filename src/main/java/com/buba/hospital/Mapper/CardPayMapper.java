@@ -13,6 +13,6 @@ public interface CardPayMapper {
     //就诊人信息
     SecPatient findPatientInfo(Integer patientId);
     //就诊卡支付按钮
-    boolean addHisOrder();
+
 
 }

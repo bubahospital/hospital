@@ -4,7 +4,6 @@ import com.buba.hospital.Bean.SecPatient;
 import com.buba.hospital.Bean.SecUser;
 import com.buba.hospital.Mapper.UserMapper;
 import com.buba.hospital.Service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -76,8 +75,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Integer getDefaultPatient(Integer userId) {
-        Integer patientId=userMapper.getDefaultPatient(userId);
-        return patientId;
+    public SecPatient getDefaultPatient(Integer userId) {
+        SecPatient patient=userMapper.getDefaultPatient(userId);
+        return patient;
     }
 }

@@ -26,4 +26,6 @@ public interface HospitalMapper {
     boolean addSecPicBySecConsultation(@Param("pic") SecPic pic);
     //根据咨询表id修改对应的支付状态为已支付
     boolean updateConsultationState(int id);
+
+    boolean updateOrderState(String orderNum);
 }

@@ -20,5 +20,5 @@ public interface UserService {
 
     boolean updateIsDefault(Integer checkId, Integer uncheckId);
 
-    Integer getDefaultPatient(Integer userId);
+    SecPatient getDefaultPatient(Integer userId);
 }

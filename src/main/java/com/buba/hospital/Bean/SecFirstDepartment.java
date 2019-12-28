@@ -1,6 +1,7 @@
 package com.buba.hospital.Bean;
 
 import java.util.Date;
+import java.util.List;
 
 public class SecFirstDepartment {
     private Integer id;
@@ -18,6 +19,8 @@ public class SecFirstDepartment {
     private Integer sequence;
 
     private String departmentInfo;
+
+    private List<SecSecondDepartment> secondList;
 
     public Integer getId() {
         return id;
@@ -81,5 +84,28 @@ public class SecFirstDepartment {
 
     public void setDepartmentInfo(String departmentInfo) {
         this.departmentInfo = departmentInfo == null ? null : departmentInfo.trim();
+    }
+
+    public List<SecSecondDepartment> getSecondList() {
+        return secondList;
+    }
+
+    public void setSecondList(List<SecSecondDepartment> secondList) {
+        this.secondList = secondList;
+    }
+
+    @Override
+    public String toString() {
+        return "SecFirstDepartment{" +
+                "id=" + id +
+                ", status='" + status + '\'' +
+                ", disabled=" + disabled +
+                ", createtime=" + createtime +
+                ", hospitalId=" + hospitalId +
+                ", departmentName='" + departmentName + '\'' +
+                ", sequence=" + sequence +
+                ", departmentInfo='" + departmentInfo + '\'' +
+                ", secondList=" + secondList +
+                '}';
     }
 }

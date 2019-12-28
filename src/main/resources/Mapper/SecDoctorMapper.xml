@@ -58,7 +58,7 @@ sd.rank=srd.rank_code and sd.id=sdm.doctor_id  and sfd.id=sdm.department_id and 
     List<SecDoctor> huoquadministrative(Integer departmentId);-->
     <select id="huoquadministrative" resultType="com.buba.hospital.Bean.SecDoctor">
     SELECT
-        sec_doctor.id,sec_pic.pic_path,sec_doctor.`name`,sec_rank_dic.rank_name,sec_first_department.department_name,sec_doctor.adeptat
+        sec_doctor.*,sec_pic.pic_path,sec_rank_dic.rank_name,sec_first_department.department_name
     FROM
         sec_first_department
         LEFT JOIN sec_second_department ON sec_first_department.id = sec_second_department.first_department_id
@@ -108,13 +108,32 @@ sd.rank=srd.rank_code and sd.id=sdm.doctor_id  and sfd.id=sdm.department_id and 
         select * from sec_pay_way
     </select>
 
-    <!--    int yuyuedingdan(@Param("secReservation") SecReservation secReservation,@Param("doctorId")  Integer doctorId,@Param("hospitalId")  Integer hospitalId);-->
-    <insert id="yuyuedingdan" >
-        insert into sec_reservation(order_id,order_status,hospital_id,timeframe_id,department_id,doctor_id,patient_id,price,price_type,price_time) values
-        (#{secReservation.orderId},1,#{hospitalId},#{secReservation.timeframeId},#{secReservation.departmentId},#{doctorId},#{secReservation.patientId},#{secReservation.price},#{secReservation.priceType},now())
-    </insert>
    <!-- SecDoctor getDoctorDetailById(Integer doctorId);-->
     <select id="getDoctorDetailById" resultType="com.buba.hospital.Bean.SecDoctor">
-        select *from sec_doctor where id=#{doctorId}
+        select * from sec_doctor where id=#{doctorId}
     </select>
+   <!--  boolean addReservation(SecReservation secReservation);-->
+    <insert id="addHisOrder" useGeneratedKeys="true" keyProperty="id" >
+         insert into his_order (id, disabled, createtime,
+      order_name, order_num, order_placer,status, pay_start_time,pay_money)
+    values (null,0, now(),'预约挂号', #{orderNum},#{patientId},0, now(),#{price})
+  </insert>
+   <!--  boolean addReservation(SecReservation secReservation);-->
+    <insert id="addReservation">
+          insert into sec_reservation(order_id,order_status,hospital_id,timeframe_id,department_id,doctor_id,
+          patient_id,price,price_type,createtime) values
+        (#{secReservation.id},0,#{secReservation.hospitalId},#{secReservation.timeframeId},
+        #{secReservation.departmentId},#{secReservation.doctorId},#{secReservation.patientId},#{secReservation.price},
+        null,now())
+    </insert>
+   <!--     boolean updateYuyueStatus2(@Param("orderId") Integer orderId,
+   @Param("status") Integer status,@Param("priceType") String priceType);
+-->
+    <update id="updateYuyueStatus">
+        update his_order set status=#{status},pay_way=#{priceType}  where id=#{orderId}
+    </update>
+    <!--boolean updateYuyueStatus2(Integer orderId);-->
+    <update id="updateYuyueStatus2">
+        update sec_reservation set order_status=#{status},price_time=now(),price_type=#{priceType} where order_id=#{orderId}
+    </update>
 </mapper>

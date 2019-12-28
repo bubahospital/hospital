@@ -5,15 +5,14 @@
     <select id="getOnlineOrder" resultType="com.buba.hospital.Bean.SecConsultation">
     SELECT
 	sec_consultation.*,
-	sec_doctor.price,his_order.order_num
+  his_order.order_num,
+	his_order.pay_money
     FROM
 	sec_consultation,
-	sec_doctor,
 	his_order
     WHERE
-	sec_consultation.doctor_id = sec_doctor.id
-	and sec_consultation.order_id=his_order.id
-    AND sec_consultation.patient_id = #{patientId}
+	sec_consultation.order_id=his_order.id
+    AND sec_consultation.patient_id =#{patientId}
     </select>
    <!-- SecConsultation getOrderDetailById(Integer id);-->
     <select id="getOrderDetailById" resultType="com.buba.hospital.Bean.SecConsultation">
@@ -56,7 +55,7 @@
       WHERE
         his_order.id = sec_consultation.order_id
         AND sec_doctor.id = sec_consultation.doctor_id
-        AND sec_consultation.id =#{id}
+        AND his_order.id =#{id}
     </select>
 
 </mapper>

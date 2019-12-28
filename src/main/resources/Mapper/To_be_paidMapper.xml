@@ -15,12 +15,11 @@
 		  spt.createtime createtime1
 				FROM
 					his_order ho,
-				  sec_patient spt,
-			  sec_payment sp
+				  sec_patient spt
 				WHERE
-					sp.patient_id = spt.id
-				AND sp.order_id = ho.id
+					ho.order_placer = spt.id
 				AND ho.`status` = 0
+				AND spt.is_default = 0
 				AND ho.order_name = "就诊卡充值"
 				and spt.user_id=#{id}
     </select>
@@ -29,7 +28,7 @@
 	<!-- // 预约挂号查询
     List<HisOrder> getappointmentList(Integer id);-->
 	<select id="getappointmentList" resultType="com.buba.hospital.Bean.HisOrder">
-       SELECT
+      SELECT
 			ho.id,
 			ho.order_num orderNum,
 			ho.order_name orderName,
@@ -44,7 +43,6 @@
 			his_order ho,
 			sec_hospital sh,
 			sec_doctor sd,
-			sec_payment sp,
 			sec_patient spt,
       sec_doctor_appointmenttime_timeframe sdat,
       sec_doctor_appointmenttime sda
@@ -52,11 +50,11 @@
 			sr.order_id = ho.id
 		AND sr.hospital_id = sh.id
 		AND sd.id = sr.doctor_id
-		AND sr.order_status = 0
+		AND ho.status = 0
 		AND ho.order_name = "预约挂号"
 		AND sr.user_id = #{id}
-		AND sp.patient_id = spt.id
-		AND sp.order_id = ho.id
+		AND sr.patient_id = spt.id
+		AND sr.order_id = ho.id
 		AND spt.is_default = 0
     and sr.timeframe_id=sdat.id
     and sda.id=sdat.appointmenttime_id
@@ -66,26 +64,26 @@
     List<HisOrder> getconsultationList(Integer id);
    -->
 	<select id="getconsultationList" resultType="com.buba.hospital.Bean.HisOrder">
-SELECT
+		SELECT
 			ho.id,
 			ho.order_num,
 			ho.order_name,
 			ho.pay_money,
 			sc.question_title questionTitle,
-			sp.patient_id patientId
+			sc.patient_id patientId,
+			spt.user_id
 		FROM
 			his_order ho,
 			sec_consultation sc,
-			sec_payment sp,
 			sec_patient spt
 		WHERE
-			ho.`status` = 0
+			ho.`status` = '0'
 		AND ho.id = sc.order_id
 		AND ho.order_name = "在线咨询"
-		AND sp.patient_id = spt.id
-		AND sp.order_id = ho.id
-		AND spt.is_default = 0
-        and spt.user_id=#{userid}
+		AND sc.order_id = ho.id
+		and sc.patient_id=spt.id
+		AND spt.is_default =0
+        and spt.user_id=#{id}
     </select>
 
 
@@ -118,10 +116,9 @@ SELECT
 	<!-- // 门诊缴费的所有状态
     List<HisOrder> getoutpaymentListall(Integer id);-->
 	<select id="getoutpaymentListall" resultType="com.buba.hospital.Bean.HisOrder">
-SELECT
-			ho.id,
-			ho.`status`,
+		SELECT
 			ho.order_num orderNum,
+			ho.id,
 			ho.order_name orderName,
 			ho.pay_money payMoney,
 			sp.order_name spOrderName,
@@ -135,6 +132,7 @@ SELECT
 		WHERE
 			sp.patient_id = spt.id
 		AND sp.order_id = ho.id
+		AND ho.`status` = 0
 		AND ho.order_name = "门诊缴费"
 		AND spt.user_id = #{id}
 		AND spt.is_default = 0

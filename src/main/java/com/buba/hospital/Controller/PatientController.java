@@ -47,8 +47,6 @@ public class PatientController {
         }else {
             return  i;
         }
-
-
     }
     //    JZ
     @RequestMapping("/findNameAndCard")

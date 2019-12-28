@@ -1,7 +1,6 @@
 package com.buba.hospital.Service;
 
 import com.buba.hospital.Bean.*;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -16,7 +15,7 @@ public interface DoctorService {
 
     List<SecDoctorAppointmenttime> huoqutime(Integer id);
 
-    List<SecDoctor> huoquadministrative(String deptname);
+    List<SecDoctor> huoquadministrative(Integer departmentId);
 
     List<SecDoctorAppointmenttimeTimeframe> huoquappointmenttime(Integer id);
 
@@ -32,5 +31,11 @@ public interface DoctorService {
 
     List<SecPayWay> selectZhifuStyle();
 
-    int yuyuedingdan(SecReservation secReservation,Integer doctorId, Integer hospitalId);
+    List<SecFirstDepartment> getAllDepartmentList(Integer hospitalId);
+
+    SecDoctor getDoctorDetailById(Integer doctorId);
+
+    Integer addReservation(SecReservation secReservation);
+
+    boolean updateYuyueStatus(Integer orderId,Integer status,String priceType);
 }

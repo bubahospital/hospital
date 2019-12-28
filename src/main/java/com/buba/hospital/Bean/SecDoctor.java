@@ -41,7 +41,16 @@ public class SecDoctor {
 
     private String hospitalName;
 
+    private String picPath;
 
+
+    public String getPicPath() {
+        return picPath;
+    }
+
+    public void setPicPath(String picPath) {
+        this.picPath = picPath;
+    }
 
     public String getHospitalName() {
         return hospitalName;
@@ -215,6 +224,10 @@ public class SecDoctor {
                 ", onlineconsultant=" + onlineconsultant +
                 ", ispremium=" + ispremium +
                 ", price=" + price +
+                ", DepartmentName='" + DepartmentName + '\'' +
+                ", rankName='" + rankName + '\'' +
+                ", hospitalName='" + hospitalName + '\'' +
+                ", picPath='" + picPath + '\'' +
                 '}';
     }
 }

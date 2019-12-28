@@ -46,10 +46,10 @@ public class UserController {
     }
     /*登录成功查询登录人默认就诊人*/
     @RequestMapping("getDefaultPatient")
-    public Integer getDefaultPatient(Integer userId){
+    public SecPatient getDefaultPatient(Integer userId){
 
-        Integer patientId=userService.getDefaultPatient(userId);
-        return patientId;
+        SecPatient patient=userService.getDefaultPatient(userId);
+        return patient;
     }
     /*添加就诊人*/
     @RequestMapping("addPatient")

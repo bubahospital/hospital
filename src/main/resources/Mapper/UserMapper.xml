@@ -6,8 +6,8 @@
         select * from sec_user where phone=#{phone}
     </select>
    <!-- Integer getDefaultPatient(Integer userId);-->
-    <select id="getDefaultPatient" resultType="integer" >
-        select id from sec_patient where user_id=#{userId} and is_default=0
+    <select id="getDefaultPatient" resultType="com.buba.hospital.Bean.SecPatient" >
+        select * from sec_patient where user_id=#{userId} and is_default=0
     </select>
    <!-- boolean addPatient(SecPatient patient);-->
     <insert id="addPatient">

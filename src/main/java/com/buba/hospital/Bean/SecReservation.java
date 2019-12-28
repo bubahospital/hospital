@@ -33,6 +33,16 @@ public class SecReservation {
 
     private Integer userId;
 
+    private String orderNum;
+
+    public String getOrderNum() {
+        return orderNum;
+    }
+
+    public void setOrderNum(String orderNum) {
+        this.orderNum = orderNum;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -172,6 +182,7 @@ public class SecReservation {
                 ", priceType='" + priceType + '\'' +
                 ", priceTime=" + priceTime +
                 ", userId=" + userId +
+                ", orderNum='" + orderNum + '\'' +
                 '}';
     }
 }

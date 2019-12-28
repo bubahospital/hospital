@@ -26,8 +26,8 @@ public class ReservationController {
     //查询预约订单
     @RequestMapping("find_reservation")
     @ResponseBody
-    public List<ReservationVo> find_reservation(SecUser user){
-        List<ReservationVo> l=  reservationService.find_reservation(user);
+    public List<ReservationVo> find_reservation(Integer patientId){
+        List<ReservationVo> l=  reservationService.find_reservation(patientId);
     return l;
     }
     //详情

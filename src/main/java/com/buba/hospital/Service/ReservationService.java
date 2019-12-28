@@ -15,7 +15,7 @@ import java.util.List;
  */
 
 public interface ReservationService {
-    List<ReservationVo> find_reservation(SecUser user);
+    List<ReservationVo> find_reservation(Integer patientId);
 
     List<ReservationVo> find_reservation_particulars(Integer id);
 

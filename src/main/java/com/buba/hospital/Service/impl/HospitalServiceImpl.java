@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -84,12 +85,13 @@ public class HospitalServiceImpl implements HospitalService {
         hisOrder.setOrderNum(orderNum);
         hisOrder.setOrderPlacer(userid);
         //免费咨询
-        if(state==1){
-            hisOrder.setStatus("已支付");
+        if(state==0){
+            hisOrder.setStatus("1");
             hisOrder.setPayMoney(0.0);
+            hisOrder.setPayStartTime(new Date());
             //付费咨询
-        }else if(state==2){
-            hisOrder.setStatus("未支付");
+        }else if(state==1){
+            hisOrder.setStatus("0");
         }
 
         boolean g=false;
@@ -118,8 +120,13 @@ public class HospitalServiceImpl implements HospitalService {
     }
 
     @Override
-    public boolean updateConsultationState(int id) {
-        return hospitalMapper.updateConsultationState( id);
+    public boolean updateConsultationState(int id, String orderNum) {
+        //修改sec_Consultation表为已支付
+        boolean b=hospitalMapper.updateConsultationState(id);
+        //修改his_order表为已支付
+        boolean b1=hospitalMapper.updateOrderState(orderNum);
+
+        return hospitalMapper.updateConsultationState(id);
     }
 
 

@@ -1,13 +1,12 @@
 package com.buba.hospital.Service.impl;
 
 import com.buba.hospital.Bean.*;
-import com.buba.hospital.Controller.DoctorController;
 import com.buba.hospital.Mapper.SecDoctorMapper;
 import com.buba.hospital.Service.DoctorService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Service
@@ -38,8 +37,8 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public List<SecDoctor> huoquadministrative(String deptname) {
-        return secDoctorMapper.huoquadministrative(deptname);
+    public List<SecDoctor> huoquadministrative(Integer departmentId) {
+        return secDoctorMapper.huoquadministrative(departmentId);
     }
 
     @Override
@@ -80,8 +79,31 @@ public class DoctorServiceImpl implements DoctorService {
         return secDoctorMapper.selectZhifuStyle();
     }
 
+
     @Override
-    public int yuyuedingdan(SecReservation secReservation,Integer doctorId, Integer hospitalId) {
-        return secDoctorMapper.yuyuedingdan(secReservation,doctorId,hospitalId);
+    public List<SecFirstDepartment> getAllDepartmentList(Integer hospitalId) {
+        List<SecFirstDepartment> list=secDoctorMapper.getAllDepartmentList(hospitalId);
+        return list;
+    }
+
+    @Override
+    public SecDoctor getDoctorDetailById(Integer doctorId) {
+        SecDoctor doctor=secDoctorMapper.getDoctorDetailById(doctorId);
+        return doctor;
+    }
+
+    @Override
+    @Transactional
+    public Integer addReservation(SecReservation secReservation) {
+        boolean b=secDoctorMapper.addHisOrder(secReservation);
+        boolean b1=secDoctorMapper.addReservation(secReservation);
+        return secReservation.getId();
+    }
+    //修改在线咨询状态为已支付
+    @Override
+    public boolean updateYuyueStatus(Integer orderId,Integer status,String priceType) {
+        boolean b=secDoctorMapper.updateYuyueStatus(orderId,status,priceType);
+        boolean b1=secDoctorMapper.updateYuyueStatus2(orderId,status,priceType);
+        return b&b1;
     }
 }

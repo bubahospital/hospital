@@ -22,8 +22,8 @@ public class ReservationServiceImpl implements ReservationService {
 @Resource
 private ReservationMapper reservationMapper;
     @Override
-    public List<ReservationVo> find_reservation(SecUser user) {
-        return reservationMapper.find_reservation(user);
+    public List<ReservationVo> find_reservation(Integer patientId) {
+        return reservationMapper.find_reservation(patientId);
     }
 
     @Override

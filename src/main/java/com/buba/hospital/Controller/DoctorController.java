@@ -28,6 +28,12 @@ public class DoctorController {
         List<SecDoctor> list=doctorService.findDoctor(deptId);
         return list;
     }
+    //查询医生信息
+    @RequestMapping("getAllDepartmentList")
+    public List<SecFirstDepartment> getAllDepartmentList(Integer hospitalId){
+        List<SecFirstDepartment> list=doctorService.getAllDepartmentList(hospitalId);
+        return list;
+    }
 
     //获取医生就诊地址
     @RequestMapping("huoquaddress")
@@ -87,8 +93,9 @@ public class DoctorController {
     }
     //获取同科室医生
     @RequestMapping("huoquadministrative")
-    public List<SecDoctor> huoquadministrative(String deptname){
-        List<SecDoctor> list=doctorService.huoquadministrative(deptname);
+    public List<SecDoctor> huoquadministrative(Integer departmentId){
+        List<SecDoctor> list=doctorService.huoquadministrative(departmentId);
+        System.out.println(list);
         return list;
     }
 
@@ -98,8 +105,8 @@ public class DoctorController {
         if(id==null){
             id=1;
         }
-        List<SecDoctorAppointmenttimeTimeframe> list=doctorService.huoquappointmenttime(id);
 
+        List<SecDoctorAppointmenttimeTimeframe> list=doctorService.huoquappointmenttime(id);
 
         return list;
     }
@@ -115,7 +122,6 @@ public class DoctorController {
         Integer sum1=doctorService.sum1(id);
         //已预约人数
         Integer sum2=doctorService.sum2(id);
-        System.out.println(sum1+"loooooooo"+sum2);
         if(sum1==sum2){
             status="停诊";
             System.out.println(status);
@@ -128,6 +134,7 @@ public class DoctorController {
     //获取预约信息
     @RequestMapping("findtime")
     public Time findtime(Integer id,Integer apptimeId,Integer doctorId){
+
         String time1=doctorService.findTime(id);
         String time2=doctorService.findTime2(apptimeId);
         String doctorName=doctorService.findDoctorName(doctorId);
@@ -137,7 +144,7 @@ public class DoctorController {
         t.setYuyuetime1(time2);
         t.setWeek(week);
         t.setDoctorName(doctorName);
-        System.out.println(t);
+
         return t;
     }
 
@@ -149,12 +156,31 @@ public class DoctorController {
     }
 
     //添加预约订单
-    @RequestMapping("yuyuedingdan")
-    public int yuyuedingdan(String yy,Integer doctorId, Integer hospitalId){
-        SecReservation secReservation=JSONUtils.json2Ojbect(yy,SecReservation.class);
-        int i=doctorService.yuyuedingdan(secReservation,doctorId,hospitalId);
-        return 1;
+    @RequestMapping("addReservation")
+    public Integer addReservation(String reservation){
+        SecReservation secReservation=JSONUtils.json2Ojbect(reservation,SecReservation.class);
+
+        Integer i=doctorService.addReservation(secReservation);
+        return i;
 
     }
-   
+    //添加预约订单
+    @RequestMapping("getDoctorDetailById")
+    public SecDoctor getDoctorDetailById(Integer doctorId){
+
+        SecDoctor doctor=doctorService.getDoctorDetailById(doctorId);
+        return doctor;
+
+    }
+    //修改预约挂号订单状态为已支付status:1,
+    //        priceType
+    @RequestMapping("updateYuyueStatus")
+    public boolean updateYuyueStatus(Integer orderId,Integer status,String priceType){
+
+        boolean b=doctorService.updateYuyueStatus(orderId,status,priceType);
+        return b;
+
+    }
+
+
 }

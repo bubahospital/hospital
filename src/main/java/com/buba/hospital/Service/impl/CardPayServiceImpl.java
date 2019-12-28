@@ -6,6 +6,8 @@ import com.buba.hospital.Service.CardPayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
 /**
  * @ClassName: CardPayServiceImpl
  * @Author: JiangZe
@@ -15,7 +17,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CardPayServiceImpl implements CardPayService {
-    @Autowired
+    @Resource
     private CardPayMapper cardPayMapper;
 
     //就诊人信息

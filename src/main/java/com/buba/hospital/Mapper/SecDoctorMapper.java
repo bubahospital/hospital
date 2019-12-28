@@ -15,7 +15,7 @@ public interface SecDoctorMapper {
 
     List<SecDoctorAppointmenttime> huoqutime(Integer id);
 
-    List<SecDoctor> huoquadministrative(String deptname);
+    List<SecDoctor> huoquadministrative(Integer departmentId);
 
     List<SecDoctorAppointmenttimeTimeframe> huoquappointmenttime(Integer id);
 
@@ -31,5 +31,16 @@ public interface SecDoctorMapper {
 
     List<SecPayWay> selectZhifuStyle();
 
-    int yuyuedingdan(@Param("secReservation") SecReservation secReservation,@Param("doctorId")  Integer doctorId,@Param("hospitalId")  Integer hospitalId);
+    List<SecFirstDepartment> getAllDepartmentList(Integer hospitalId);
+
+    SecDoctor getDoctorDetailById(Integer doctorId);
+
+    boolean addHisOrder(SecReservation secReservation);
+
+    boolean addReservation(@Param("secReservation")SecReservation secReservation);
+
+
+    boolean updateYuyueStatus(@Param("orderId") Integer orderId,@Param("status") Integer status,@Param("priceType") String priceType);
+    boolean updateYuyueStatus2(@Param("orderId") Integer orderId,@Param("status") Integer status,@Param("priceType") String priceType);
+
 }

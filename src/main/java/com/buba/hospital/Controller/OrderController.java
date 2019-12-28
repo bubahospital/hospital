@@ -41,11 +41,11 @@ public class OrderController {
     /*根据id查询未支付订单详情*/
     @RequestMapping("getHisOrderById")
     public HisOrder getHisOrderById(Integer id){
-        System.out.println("orderId"+id);
         HisOrder hisOrder= orderService.getHisOrderById(id);
 
         return hisOrder;
     }
+
 
 
 

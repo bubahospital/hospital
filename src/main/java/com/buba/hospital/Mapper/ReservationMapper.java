@@ -13,7 +13,7 @@ import java.util.List;
  * @date 2019/12/1818:38
  */
 public interface ReservationMapper {
-    List<ReservationVo> find_reservation(SecUser user);
+    List<ReservationVo> find_reservation(Integer patientId);
 
     List<ReservationVo> find_reservation_particulars(Integer id);
 
