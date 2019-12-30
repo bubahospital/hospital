@@ -1,11 +1,9 @@
 package com.buba.hospital.Controller;
 
-import com.buba.hospital.Bean.HisOrder;
-import com.buba.hospital.Bean.PayHoPatVO;
-import com.buba.hospital.Bean.PayMentPOJO;
-import com.buba.hospital.Bean.SecPatient;
+import com.buba.hospital.Bean.*;
 import com.buba.hospital.Service.PatientService;
 import com.buba.hospital.utils.poiReadExcelInfo;
+import com.buba.hospital.utils.poiReadExcelInfo1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,13 +18,6 @@ public class PatientController {
 
     @Autowired
     private PatientService patientService;
-
-    //selectPatient 查询就诊人
-    @RequestMapping("/selectPatient")
-    public List<SecPatient> selectPatient(Integer id){//用户id(获取session的id)
-        List<SecPatient>  list =patientService.selectpatient(id);
-        return list;
-    }
 
 
     //UpdateMoren 修改默认人
@@ -48,35 +39,37 @@ public class PatientController {
             return  i;
         }
     }
-    //    JZ
-    @RequestMapping("/findNameAndCard")
-    @ResponseBody
-    public SecPatient findNameAndCard(Integer patientId) {
-        SecPatient patient = patientService.findNameAndCard(patientId);
-//        System.out.println(patient);
-        return patient;
-    }
+    //根据就诊人查询门诊缴费订单
     @RequestMapping("/findOrderInfo")
     @ResponseBody
     public List<PayHoPatVO> findOrderInfo(Integer orderPlacer) {
         List<PayHoPatVO> orderInfo = patientService.findOrderInfo(orderPlacer);
-//        System.out.println(orderInfo);
         return orderInfo;
     }
-    /*报表excel表返回前端显示*/
+    /*根据订单号数组返回相应的订单详情*/
     @RequestMapping("/payMentList")
     @ResponseBody
-    public  List<PayMentPOJO>  payMentList(String url) {//用户id(获取session的id)
-        List<PayMentPOJO> list = poiReadExcelInfo.Res("D:\\kaoshi\\test.xlsx");//传的前端获取对应的地址（活的最后再改）
-//        System.out.println(list);
-        return  list;
+    public  List<PayHoPatVO>  payMentList(Integer[] ids) {//用户id(获取session的id)
+
+        List<PayHoPatVO> orderInfo = patientService.payMentList(ids);
+        return  orderInfo;
     }
     //门诊缴费==支付方式页面：单号，名称， 金额
     @RequestMapping("/findPayWays")
     @ResponseBody
     public HisOrder findPayWays(String orderNum) {
         HisOrder ways = patientService.findPayWays(orderNum);
-        System.out.println(ways);
+
         return ways;
+    }
+    //修改门诊缴费状态
+    @RequestMapping("/updateJiaofeiOrder")
+    @ResponseBody
+    public boolean updateJiaofeiOrder(String payWay,Integer[] ids) {
+
+
+      boolean b = patientService.updateJiaofeiOrder(payWay,ids);
+
+        return true;
     }
 }

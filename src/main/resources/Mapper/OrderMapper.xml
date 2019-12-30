@@ -57,5 +57,23 @@
         AND sec_doctor.id = sec_consultation.doctor_id
         AND his_order.id =#{id}
     </select>
-
+    <!--boolean addChongzhiOrder(HisOrder order);-->
+    <insert id="addChongzhiOrder">
+        insert into his_order (id, disabled, createtime,
+      order_name, order_num, order_placer,
+      status, pay_start_time, refund_start_time,
+      pay_money, pay_way)
+    values (null, 0, now(),
+      '就诊卡充值', #{hisOrder.orderNum,jdbcType=VARCHAR}, #{hisOrder.orderPlacer,jdbcType=INTEGER},
+      0 , #{hisOrder.payStartTime,jdbcType=TIMESTAMP}, #{hisOrder.refundStartTime,jdbcType=TIMESTAMP},
+      #{hisOrder.payMoney,jdbcType=DOUBLE}, #{hisOrder.payWay,jdbcType=VARCHAR})
+    </insert>
+    <!--boolean updateChongzhiOrder(@Param("orderNum") String orderNum,@Param("payWay") String payWay);-->
+    <update id="updateChongzhiOrder">
+        update his_order set pay_start_time=now(),status=1,pay_way=#{payWay} where order_num=#{orderNum}
+    </update>
+    <!--boolean updateMoney(@Param("patientId") Integer patientId,@Param("paynum") Double paynum);-->
+    <update id="updateMoney">
+        update sec_patient set medicalCard_balance=#{paynum} where id=#{patientId}
+    </update>
 </mapper>

@@ -45,6 +45,23 @@ public class OrderController {
 
         return hisOrder;
     }
+    /*添加就诊卡充值订单*/
+    @RequestMapping("addChongzhiOrder")
+    public boolean addChongzhiOrder(HisOrder order){
+        System.out.println(order);
+
+        boolean b= orderService.addChongzhiOrder(order);
+
+        return b;
+    }
+    /*修改充值订单为成功*/
+    @RequestMapping("updateChongzhiOrder")
+    public boolean updateChongzhiOrder(String orderNum,String payWay,Integer patientId,Double paynum){
+
+        boolean b= orderService.updateChongzhiOrder(orderNum,payWay,patientId,paynum);
+
+        return b;
+    }
 
 
 

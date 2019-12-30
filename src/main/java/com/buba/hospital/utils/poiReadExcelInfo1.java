@@ -1,7 +1,6 @@
 package com.buba.hospital.utils;
 
-
-import com.buba.hospital.Bean.ReportBaobiao;
+import com.buba.hospital.Bean.PayMentPOJO;
 import org.apache.http.entity.ContentType;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -9,17 +8,17 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class poiReadExcelInfo {
+public class poiReadExcelInfo1 {
 
     private static final String EXCEL_XLS = "xls";
     private static final String EXCEL_XLSX = "xlsx";
@@ -70,8 +69,8 @@ public class poiReadExcelInfo {
         return cellValue;
     }
 
-    public static List<ReportBaobiao> readExcel(MultipartFile file) throws Exception {
-        List<ReportBaobiao> resolveRuleList = new ArrayList<ReportBaobiao>();
+    public static List<PayMentPOJO> readExcel(MultipartFile file) throws Exception {
+        List<PayMentPOJO> resolveRuleList = new ArrayList<PayMentPOJO>();
         try {
             checkExcelVaild(file);
         }catch (Exception e){
@@ -98,7 +97,7 @@ public class poiReadExcelInfo {
                 count++;
                 continue;
             }
-            ReportBaobiao resolveRule = new ReportBaobiao();
+            PayMentPOJO resolveRule = new PayMentPOJO();
             //遍历每一列数据
             int c = 0;
             for (Cell cell : row){
@@ -108,14 +107,30 @@ public class poiReadExcelInfo {
                 }*/
                 switch (c){
                     case 0:
-                        resolveRule.setName(value);
+                        resolveRule.setXiangMu(value);
                         break;
                     case 1:
-                        resolveRule.setJiehuo(value);
+                        resolveRule.setDanJia(value);
                         break;
                     case 2:
-                        resolveRule.setCankaozhi(value);
-
+                        resolveRule.setShuLiang(value);
+                        break;
+                    case 3:
+                        resolveRule.setJinE(Double.parseDouble(value));
+                   /*     break;
+                    case 4:
+                        resolveRule.setNote(value);
+                        break;
+                    case 5:
+                        String[] strings = value.split("###");
+                        List<Pattern> patternList = new ArrayList<Pattern>();
+                        Pattern pattern = null;
+                        for (int x = 0;x<strings.length;x++){
+                            pattern = Pattern.compile(strings[x]);
+                            patternList.add(pattern);
+                        }
+                        resolveRule.setRuleRegex(patternList);
+                        break;*/
                 }
                 c++;
             }
@@ -124,11 +139,11 @@ public class poiReadExcelInfo {
         return resolveRuleList;
     }
 
-    public static List<ReportBaobiao> Res(String  pathname){
-        List<ReportBaobiao> resolveRuleList = null;
+    public static List<PayMentPOJO> Res(String  pathname){
+        List<PayMentPOJO> resolveRuleList = null;
         try {
         /*    Scanner scanner = new Scanner(System.in);*/
-            System.out.println("请输入文件绝对路径(如:E:/解析规则.xlsx)：");
+//            System.out.println("请输入文件绝对路径(如:E:/解析规则.xlsx)：");
             File file = new File(pathname);
 
             FileInputStream inputStream = new FileInputStream(file);
@@ -144,54 +159,10 @@ public class poiReadExcelInfo {
         return resolveRuleList;
     }
 
-    public static void main(String[] args) throws IOException {
-        String wenjian="test";
-
-//        String path="D:\\wx_hospital\\reportFile\\"+wenjian+"";
-        //List<ReportBaobiao> resolveRuleList = Res(path);
-//        for (ReportBaobiao  bus:resolveRuleList) {
-//            System.out.println(bus);
-//        }
-
-
-        //判断文件是否存在  如果不存在则不读取返回前端
-        File file = new File("D:\\wx_hospital");
-        List<ReportBaobiao> list = null;
-        try {
-            if (!file.exists()) { //文件夹不存在
-                System.out.println("异常1");
-            }else {//文件夹存在
-                File file1 = new File("D:\\wx_hospital\\reportFile");
-                if (!file1.exists()) {
-                    System.out.println("异常2");
-                } else {
-                    File file2 = new File("D:\\wx_hospital\\reportFile\\" + wenjian + ".xlsx");
-                    if (!file2.exists()) {
-                        System.out.println("异常3");
-                    } else {
-                        String path1 = "D:\\wx_hospital\\reportFile\\" + wenjian + ".xlsx";
-                        list = poiReadExcelInfo.Res(path1);//传的前端获取对应的地址（活的最后再改）
-//                        for (ReportBaobiao  bus:list) {
-//                                   System.out.println(bus);
-//                         }
-                    }
-                }
-            }
-        } catch (Exception exc) {//捕获异常
-            exc.toString();
-            System.out.println("异常1111");
+    public static void main(String[] args){
+        List<PayMentPOJO> resolveRuleList = Res("D:\\kaoshi\\test.xlsx");
+        for (PayMentPOJO  bus:resolveRuleList) {
+            System.out.println(bus);
         }
-
-        System.out.println(list);
-
-
-
-
-
     }
-
-
-
-
-
 }

@@ -225,4 +225,33 @@ public class HisOrder {
     public void setSpOrderName(String spOrderName) {
         this.spOrderName = spOrderName;
     }
+
+    @Override
+    public String toString() {
+        return "HisOrder{" +
+                "id=" + id +
+                ", disabled=" + disabled +
+                ", createtime=" + createtime +
+                ", orderName='" + orderName + '\'' +
+                ", orderNum='" + orderNum + '\'' +
+                ", orderPlacer=" + orderPlacer +
+                ", status='" + status + '\'' +
+                ", payStartTime=" + payStartTime +
+                ", refundStartTime=" + refundStartTime +
+                ", payMoney=" + payMoney +
+                ", payWay='" + payWay + '\'' +
+                ", price=" + price +
+                ", patientMedicalCardNumber='" + patientMedicalCardNumber + '\'' +
+                ", patientName='" + patientName + '\'' +
+                ", createtime1=" + createtime1 +
+                ", hospitalName='" + hospitalName + '\'' +
+                ", name='" + name + '\'' +
+                ", timeframe='" + timeframe + '\'' +
+                ", appointmentTime=" + appointmentTime +
+                ", questionTitle='" + questionTitle + '\'' +
+                ", patientId=" + patientId +
+                ", spOrderName='" + spOrderName + '\'' +
+                ", hisPayments=" + hisPayments +
+                '}';
+    }
 }

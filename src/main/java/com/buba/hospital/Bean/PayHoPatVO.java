@@ -21,57 +21,63 @@ public class PayHoPatVO {
     #sec_patient 就诊人表
     #his_payment 缴费订单表
      */
-    private String patientName;//就诊人姓名
-    private String orderNum;//订单号
-    @JsonFormat(pattern = "yyyy-MM-dd", timezone="GMT+8")
+    private Integer id;
+
+    private Boolean disabled;
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date priceTime;//支付时间
-    private double price;//支付金额
-    private String orderName;//订单名称
-    private String name;
+    private Date createtime;
 
-    @Override
-    public String toString() {
-        return "PayHoPatVO{" +
-                "patientName='" + patientName + '\'' +
-                ", orderNum='" + orderNum + '\'' +
-                ", priceTime=" + priceTime +
-                ", price=" + price +
-                ", orderName='" + orderName + '\'' +
-                ", name='" + name + '\'' +
-                '}';
+    private String orderName;
+
+    private String orderNum;
+
+    private Integer orderPlacer;
+
+    private String status;
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date payStartTime;
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date refundStartTime;
+
+    private Double payMoney;
+
+    private String payWay;
+
+    private String orderId;
+
+    private String orderDetailName;
+
+    private Integer patientId;
+
+    private String patientMedicalcardnumber;
+
+    private String fileAddr;
+
+    public Integer getId() {
+        return id;
     }
 
-    public String getPatientName() {
-        return patientName;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void setPatientName(String patientName) {
-        this.patientName = patientName;
+    public Boolean getDisabled() {
+        return disabled;
     }
 
-    public String getOrderNum() {
-        return orderNum;
+    public void setDisabled(Boolean disabled) {
+        this.disabled = disabled;
     }
 
-    public void setOrderNum(String orderNum) {
-        this.orderNum = orderNum;
+    public Date getCreatetime() {
+        return createtime;
     }
 
-    public Date getPriceTime() {
-        return priceTime;
-    }
-
-    public void setPriceTime(Date priceTime) {
-        this.priceTime = priceTime;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
+    public void setCreatetime(Date createtime) {
+        this.createtime = createtime;
     }
 
     public String getOrderName() {
@@ -82,11 +88,128 @@ public class PayHoPatVO {
         this.orderName = orderName;
     }
 
-    public String getName() {
-        return name;
+    public String getOrderNum() {
+        return orderNum;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setOrderNum(String orderNum) {
+        this.orderNum = orderNum;
+    }
+
+    public Integer getOrderPlacer() {
+        return orderPlacer;
+    }
+
+    public void setOrderPlacer(Integer orderPlacer) {
+        this.orderPlacer = orderPlacer;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Date getPayStartTime() {
+        return payStartTime;
+    }
+
+    public void setPayStartTime(Date payStartTime) {
+        this.payStartTime = payStartTime;
+    }
+
+    public Date getRefundStartTime() {
+        return refundStartTime;
+    }
+
+    public void setRefundStartTime(Date refundStartTime) {
+        this.refundStartTime = refundStartTime;
+    }
+
+    public Double getPayMoney() {
+        return payMoney;
+    }
+
+    public void setPayMoney(Double payMoney) {
+        this.payMoney = payMoney;
+    }
+
+    public String getPayWay() {
+        return payWay;
+    }
+
+    public void setPayWay(String payWay) {
+        this.payWay = payWay;
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+
+    public String getOrderDetailName() {
+        return orderDetailName;
+    }
+
+    public void setOrderDetailName(String orderDetailName) {
+        this.orderDetailName = orderDetailName;
+    }
+
+    public Integer getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(Integer patientId) {
+        this.patientId = patientId;
+    }
+
+    public String getPatientMedicalcardnumber() {
+        return patientMedicalcardnumber;
+    }
+
+    public void setPatientMedicalcardnumber(String patientMedicalcardnumber) {
+        this.patientMedicalcardnumber = patientMedicalcardnumber;
+    }
+
+    public String getFileAddr() {
+        return fileAddr;
+    }
+
+    public void setFileAddr(String fileAddr) {
+        this.fileAddr = fileAddr;
+    }
+
+    @Override
+    public String toString() {
+        return "PayHoPatVO{" +
+                "id=" + id +
+                ", disabled=" + disabled +
+                ", createtime=" + createtime +
+                ", orderName='" + orderName + '\'' +
+                ", orderNum='" + orderNum + '\'' +
+                ", orderPlacer=" + orderPlacer +
+                ", status='" + status + '\'' +
+                ", payStartTime=" + payStartTime +
+                ", refundStartTime=" + refundStartTime +
+                ", payMoney=" + payMoney +
+                ", payWay='" + payWay + '\'' +
+                ", orderId='" + orderId + '\'' +
+                ", orderDetailName='" + orderDetailName + '\'' +
+                ", patientId=" + patientId +
+                ", patientMedicalcardnumber='" + patientMedicalcardnumber + '\'' +
+                ", fileAddr='" + fileAddr + '\'' +
+                '}';
     }
 }
+
+
+
+
+
+
+

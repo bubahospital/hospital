@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.buba.hospital.Mapper.SecReportMapper" >
+
+    <!--就诊人检测报告内容回显 List<SecReport> seclectReport(Integer id);-->
+    <select id="seclectReport" resultType="com.buba.hospital.Bean.SecReport">
+        select * from sec_report WHERE examine_id = #{id}
+    </select>
+
+    <!--检查报告-->
+    <!-- JiuzhenPersonVo Xingqing(@Param("id") Integer id,@Param("reportId") Integer reportId);-->
+    <select id="Xingqing" resultType="com.buba.hospital.Bean.JiuzhenPersonVo">
+        select sr.id,sp.patient_name,sr.examine_info,sr.sample_type,
+        sr.sample_time,ssd.second_department_name,ssd.second_department_address,sr.file_addr
+          from sec_patient sp,sec_report sr,sec_second_department ssd
+          WHERE sp.id = sr.examine_id AND sr.clinic_department_id =ssd.id AND sr.id = #{reportId}
+    </select>
+
+
+
+</mapper>

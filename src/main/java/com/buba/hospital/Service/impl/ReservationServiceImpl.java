@@ -2,7 +2,6 @@ package com.buba.hospital.Service.impl;
 
 import com.buba.hospital.Bean.PaymentVo;
 import com.buba.hospital.Bean.ReservationVo;
-import com.buba.hospital.Bean.SecUser;
 import com.buba.hospital.Mapper.ReservationMapper;
 import com.buba.hospital.Service.ReservationService;
 import org.springframework.stereotype.Service;
@@ -43,12 +42,12 @@ private ReservationMapper reservationMapper;
     }
 
     @Override
-    public List<PaymentVo> findPaymentVo(SecUser user) {
-        return reservationMapper.findPaymentVo(user);
+    public List<PaymentVo> findPaymentVo(Integer patientId) {
+        return reservationMapper.findPaymentVo(patientId);
     }
 
     @Override
-    public PaymentVo find_payTheFees(Integer id) {
-        return reservationMapper.find_payTheFees(id);
+    public PaymentVo find_payTheFees(String orderNum) {
+        return reservationMapper.find_payTheFees(orderNum);
     }
 }

@@ -90,48 +90,20 @@ WHERE
 				o.id = r.order_id
 			AND o.id =#{id}
 	</update>
-<!--List<PaymentVo> findPaymentVo(SecUser user);-->
+<!--List<PaymentVo> findPaymentVo(Integer patientId);-->
 	<select id="findPaymentVo" resultType="com.buba.hospital.Bean.PaymentVo">
 		select
-			o.id,
-			o.order_num orderNum,
-			o.pay_money payMoney,
-			o.`status` status,
-			o.pay_start_time payStartTime,
-			o.pay_way payWay,
-			o.createtime createtime,
-			p.patient_name patientName,
-			p.patient_medicalCardNumber patientMedicalCardNumber,
-			p.medicalCard_balance medicalCardBalance
+			*
 		FROM
-			his_order o,
-			sec_patient p
+			his_order
+
 		WHERE
-			o.order_placer = p.id
-		AND o.order_name = '就诊卡充值'
-		AND p.user_id=1
+		 his_order.order_name = '就诊卡充值'
+		 and
+		order_placer=#{patientId}
 	</select>
-	<!--PaymentVo find_payTheFees(Integer id);-->
+	<!--PaymentVo find_payTheFees(string orderNum);-->
 	<select id="find_payTheFees" resultType="com.buba.hospital.Bean.PaymentVo">
-		select
-			o.id,
-			o.order_num orderNum,
-			o.order_name orderName,
-			o.pay_money payMoney,
-			o.`status` status,
-			o.pay_start_time payStartTime,
-			o.pay_way payWay,
-			o.createtime createtime,
-			p.patient_name patientName,
-			p.patient_medicalCardNumber patientMedicalCardNumber,
-			p.medicalCard_balance medicalCardBalance
-		FROM
-			his_order o,
-			sec_patient p
-		WHERE
-			o.order_placer = p.id
-		AND o.order_name = '就诊卡充值'
-		AND p.user_id=1
-		and o.id=#{id}
+		select * from his_order where order_num=#{orderNum}
 	</select>
 </mapper>

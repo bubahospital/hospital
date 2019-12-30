@@ -2,15 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.buba.hospital.Mapper.PatientMapper" >
 
-
-
-
-
-    <!-- List<SecPatient> selectpatient(Integer id);查询当前用户就诊人-->
-    <select id="selectpatient" resultType="com.buba.hospital.Bean.SecPatient">
-      select * from sec_patient where user_id=#{id}
-    </select>
-
     <!-- int UpdateMoren(Integer id); 修改就诊人默认人-->
     <update id="UpdateMoren">
 UPDATE sec_patient
@@ -39,16 +30,59 @@ UPDATE sec_patient
     <!--//门诊缴费==就诊人姓名、卡号 SecPatient findNameAndCard(Integer patientId);-->
 
 
-    <select resultType="com.buba.hospital.Bean.SecPatient" id="findNameAndCard">select * from sec_patient where id = #{patientId} </select>
+    <select resultType="com.buba.hospital.Bean.SecPatient" id="findNameAndCard">
+
+      select * from sec_patient where id = #{patientId}
+
+    </select>
 
     <!--门诊缴费=根据就诊人查未支付的订单信息=单号、姓名、时间、缴费名、金额 List<PayHoPatVO> findOrderInfo(Integer orderPlacer);-->
 
-
-    <select resultType="com.buba.hospital.Bean.PayHoPatVO" id="findOrderInfo">SELECT ho.`order_num`,pat.`patient_name`,pay.`price_time`,hp.`name`,hp.`price`FROM sec_payment payLEFT JOIN his_order ho ON ho.id=pay.order_idLEFT JOIN sec_patient pat ON pat.id=pay.patient_idLEFT JOIN his_payment hp ON hp.`order_id`=ho.`id`WHERE ho.order_placer=#{orderPlacer} AND ho.status='0'AND ho.order_name='门诊缴费' </select>
+    <select resultType="com.buba.hospital.Bean.PayHoPatVO" id="findOrderInfo">
+        SELECT
+            his_order.*,
+            sec_payment.order_name orderDetailName,
+            sec_payment.file_addr
+        FROM
+            his_order,sec_payment
+        WHERE
+            his_order.id=sec_payment.order_id
+            and his_order.`status` = 0
+            AND his_order.order_name = '门诊缴费'
+            and his_order.order_placer=#{orderPlacer}
+    </select>
 
     <!--//门诊缴费==支付方式页面：单号，名称， 金额 HisOrder findPayWays(String orderNum);-->
 
 
-    <select resultType="com.buba.hospital.Bean.HisOrder" id="findPayWays"> select * from his_order where order_num=#{orderNum} </select>
+    <select resultType="com.buba.hospital.Bean.HisOrder" id="findPayWays">
+      select * from his_order where order_num=#{orderNum}
 
+    </select>
+    <!-- List<PayHoPatVO> payMentList(String[] ids);-->
+    <select resultType="com.buba.hospital.Bean.PayHoPatVO" id="payMentList">
+        SELECT
+            his_order.*,
+            sec_payment.order_name orderDetailName,
+            sec_payment.file_addr
+        FROM
+            his_order,sec_payment
+        WHERE
+            his_order.id=sec_payment.order_id
+            and his_order.`status` = 0
+            and his_order.id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+
+            AND his_order.order_name = '门诊缴费'
+
+    </select>
+   <!-- boolean updateJiaofeiOrder(String payWay, Integer[] ids);-->
+    <update id="updateJiaofeiOrder">
+      update his_order set status=1,pay_start_time=now(),pay_way=#{payWay} where id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </update>
 </mapper>

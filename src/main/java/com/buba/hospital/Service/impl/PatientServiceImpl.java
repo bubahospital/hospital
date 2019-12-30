@@ -17,10 +17,6 @@ public class PatientServiceImpl implements PatientService {
     private PatientMapper patientMapper;
 
 
-    @Override
-    public List<SecPatient> selectpatient(Integer id) {
-        return patientMapper.selectpatient(id);
-    }
 
     @Override
     public int UpdateMoren(Integer id) {
@@ -54,5 +50,17 @@ public class PatientServiceImpl implements PatientService {
     public HisOrder findPayWays(String orderNum) {
         HisOrder ways = patientMapper.findPayWays(orderNum);
         return ways;
+    }
+
+    @Override
+    public List<PayHoPatVO> payMentList(Integer[] ids) {
+        List<PayHoPatVO> orderInfo = patientMapper.payMentList(ids);
+        return orderInfo;
+    }
+
+    @Override
+    public boolean updateJiaofeiOrder(String payWay, Integer[] ids) {
+        boolean b = patientMapper.updateJiaofeiOrder(payWay,ids);
+        return b;
     }
 }

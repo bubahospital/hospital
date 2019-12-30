@@ -8,8 +8,6 @@ import java.util.List;
 
 public interface PatientService {
 
-    List<SecPatient> selectpatient(Integer id);
-
     int UpdateMoren(Integer id);
 
     SecPatient selectHuixiapatient(Integer id);
@@ -22,4 +20,8 @@ public interface PatientService {
     List<PayHoPatVO> findOrderInfo(Integer orderPlacer);
     //门诊缴费==支付方式页面：单号，名称， 金额
     HisOrder findPayWays(String orderNum);
+
+    List<PayHoPatVO> payMentList(Integer[] ids);
+
+    boolean updateJiaofeiOrder(String payWay, Integer[] ids);
 }

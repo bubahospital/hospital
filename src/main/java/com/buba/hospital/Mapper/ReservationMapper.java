@@ -2,7 +2,6 @@ package com.buba.hospital.Mapper;
 
 import com.buba.hospital.Bean.PaymentVo;
 import com.buba.hospital.Bean.ReservationVo;
-import com.buba.hospital.Bean.SecUser;
 
 import java.util.List;
 
@@ -19,7 +18,7 @@ public interface ReservationMapper {
 
     boolean cancelReservation(Integer id);
 
-    List<PaymentVo> findPaymentVo(SecUser user);
+    List<PaymentVo> findPaymentVo(Integer patientId);
 
-    PaymentVo find_payTheFees(Integer id);
+    PaymentVo find_payTheFees(String orderNum);
 }

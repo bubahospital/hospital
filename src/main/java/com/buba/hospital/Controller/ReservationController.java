@@ -47,15 +47,15 @@ public class ReservationController {
     //查询就诊卡充值订单
     @RequestMapping("findPaymentVo")
     @ResponseBody
-    public List<PaymentVo> findPaymentVo(SecUser user){
-        List<PaymentVo> l=  reservationService.findPaymentVo(user);
+    public List<PaymentVo> findPaymentVo(Integer patientId){
+        List<PaymentVo> l=  reservationService.findPaymentVo(patientId);
         return l;
     }
     //查询就诊卡充值订单详情
     @RequestMapping("find_payTheFees")
     @ResponseBody
-    public PaymentVo find_payTheFees(Integer id){
-        PaymentVo l=  reservationService.find_payTheFees(id);
+    public PaymentVo find_payTheFees(String orderNum){
+        PaymentVo l=  reservationService.find_payTheFees(orderNum);
         return l;
     }
 }

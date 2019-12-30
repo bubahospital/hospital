@@ -3,12 +3,11 @@ package com.buba.hospital.Mapper;
 import com.buba.hospital.Bean.HisOrder;
 import com.buba.hospital.Bean.PayHoPatVO;
 import com.buba.hospital.Bean.SecPatient;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 public interface PatientMapper {
-
-    List<SecPatient> selectpatient(Integer id);
 
     int UpdateMoren(Integer id);
 
@@ -23,4 +22,7 @@ public interface PatientMapper {
     //门诊缴费==支付方式页面：单号，名称， 金额
     HisOrder findPayWays(String orderNum);
 
+    List<PayHoPatVO> payMentList(@Param("ids") Integer[] ids);
+
+    boolean updateJiaofeiOrder(@Param("payWay") String payWay,@Param("ids")  Integer[] ids);
 }

@@ -2,14 +2,9 @@ package com.buba.hospital.Service.impl;
 
 import com.buba.hospital.Bean.HisOrder;
 import com.buba.hospital.Bean.SecConsultation;
-import com.buba.hospital.Bean.SecPatient;
-import com.buba.hospital.Bean.SecUser;
 import com.buba.hospital.Mapper.OrderMapper;
-import com.buba.hospital.Mapper.UserMapper;
 import com.buba.hospital.Service.OrderService;
-import com.buba.hospital.Service.UserService;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -44,5 +39,19 @@ public class OrderServiceImpl implements OrderService {
     public HisOrder getHisOrderById(Integer id) {
         HisOrder hisOrder= orderMapper.getHisOrderById(id);
         return hisOrder;
+    }
+
+    @Override
+    public boolean addChongzhiOrder(HisOrder order) {
+        boolean b= orderMapper.addChongzhiOrder(order);
+        return b;
+    }
+
+    @Override
+    public boolean updateChongzhiOrder(String orderNum, String payWay, Integer patientId,Double paynum) {
+        boolean b= orderMapper.updateChongzhiOrder(orderNum,payWay);
+        boolean b1= orderMapper.updateMoney(patientId,paynum);
+
+        return b&b1;
     }
 }
