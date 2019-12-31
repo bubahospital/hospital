@@ -22,7 +22,7 @@ public interface PatientMapper {
     //门诊缴费==支付方式页面：单号，名称， 金额
     HisOrder findPayWays(String orderNum);
 
-    List<PayHoPatVO> payMentList(@Param("ids") Integer[] ids);
+    List<PayHoPatVO> payMentList(@Param("ids") String[] ids);
 
-    boolean updateJiaofeiOrder(@Param("payWay") String payWay,@Param("ids")  Integer[] ids);
+    boolean updateJiaofeiOrder(@Param("payWay") String payWay,@Param("ids")  String[] ids);
 }

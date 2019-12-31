@@ -21,7 +21,7 @@ public interface PatientService {
     //门诊缴费==支付方式页面：单号，名称， 金额
     HisOrder findPayWays(String orderNum);
 
-    List<PayHoPatVO> payMentList(Integer[] ids);
+    List<PayHoPatVO> payMentList(String[] ids);
 
-    boolean updateJiaofeiOrder(String payWay, Integer[] ids);
+    boolean updateJiaofeiOrder(String payWay, String[] ids);
 }

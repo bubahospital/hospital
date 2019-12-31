@@ -39,7 +39,7 @@
       question_title, sex, Illness_description,
       payment_status, doctor_id, response_id,
       response, response_time)
-    values (null, 1, 0,
+    values (null, 0, 0,
       now(), #{orderId}, #{userid},
       #{biaoti}, #{fix}, #{text},
       #{paymentStatus}, #{doctor.id}, null,

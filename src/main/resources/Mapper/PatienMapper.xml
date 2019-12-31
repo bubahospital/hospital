@@ -70,7 +70,7 @@ UPDATE sec_patient
         WHERE
             his_order.id=sec_payment.order_id
             and his_order.`status` = 0
-            and his_order.id in
+            and his_order.order_num in
         <foreach collection="ids" item="id" open="(" close=")" separator=",">
             #{id}
         </foreach>

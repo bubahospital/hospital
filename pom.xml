@@ -155,9 +155,13 @@
             <version>5.1.9.RELEASE</version>
             <scope>compile</scope>
         </dependency>
+
     </dependencies>
+
+
     <build>
-        <finalName>hospital</finalName>
+
+        <finalName>hospital8088</finalName>
         <resources>
             <resource>
                 <directory>${basedir}/src/main/webapp</directory>
@@ -182,18 +186,18 @@
                 <configuration>
                     <mainClass>com.buba.hospital.HospitalApplication</mainClass>
                 </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <encoding>UTF-8</encoding>
-                    <compilerArguments>
-                        <bootclasspath>${JAVA_HOME}/jre/lib/rt.jar</bootclasspath>
-                    </compilerArguments>
-                </configuration>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.7</version>
             </plugin>
         </plugins>
     </build>

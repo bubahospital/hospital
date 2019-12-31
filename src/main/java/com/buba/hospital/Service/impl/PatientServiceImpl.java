@@ -53,13 +53,13 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public List<PayHoPatVO> payMentList(Integer[] ids) {
+    public List<PayHoPatVO> payMentList(String[] ids) {
         List<PayHoPatVO> orderInfo = patientMapper.payMentList(ids);
         return orderInfo;
     }
 
     @Override
-    public boolean updateJiaofeiOrder(String payWay, Integer[] ids) {
+    public boolean updateJiaofeiOrder(String payWay, String[] ids) {
         boolean b = patientMapper.updateJiaofeiOrder(payWay,ids);
         return b;
     }

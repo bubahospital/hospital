@@ -53,9 +53,9 @@ server:
 #配置mybatis信息
 mybatis:
   #注意：一定要对应mapper映射xml文件的所在路径
-  mapper-locations: classpath:mapper/*.xml
+  mapper-locations: classpath:Mapper/*.xml
   # 注意：对应实体类的路径 起别名
-  type-aliases-package: com.example.demo.pojo
+  type-aliases-package: com.buba.hospital.Bean
 
   configuration:
     # spring boot集成mybatis的方式打印sql

@@ -52,9 +52,8 @@
 		AND sd.id = sr.doctor_id
 		AND ho.status = 0
 		AND ho.order_name = "预约挂号"
-		AND sr.user_id = #{id}
+		AND spt.user_id = #{id}
 		AND sr.patient_id = spt.id
-		AND sr.order_id = ho.id
 		AND spt.is_default = 0
     and sr.timeframe_id=sdat.id
     and sda.id=sdat.appointmenttime_id
@@ -118,6 +117,7 @@ SELECT
 	<select id="getoutpaymentListall" resultType="com.buba.hospital.Bean.HisOrder">
 		SELECT
 			ho.order_num orderNum,
+			ho.status,
 			ho.id,
 			ho.order_name orderName,
 			ho.pay_money payMoney,

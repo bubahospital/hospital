@@ -50,6 +50,15 @@ public class SecConsultation {
 
     private String picPath;
 
+    private String payMoney;
+
+    public String getPayMoney() {
+        return payMoney;
+    }
+
+    public void setPayMoney(String payMoney) {
+        this.payMoney = payMoney;
+    }
 
     public String getName() {
 

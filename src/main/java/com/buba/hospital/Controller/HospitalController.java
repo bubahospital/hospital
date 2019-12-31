@@ -112,14 +112,18 @@ public class HospitalController {
         int userid=Integer.parseInt(jsonObject.getString("userid"));  //当前用户id
         System.out.println("用户id是："+userid);
         int state=Integer.parseInt(jsonObject.getString("state"));  //问题是付费还是免费
+
         System.out.println("状态："+state);
         //根据前台传过来的付费状态，判断需不需要支付
         int paymentStatus=1;
+        double payMoney=0;
         if(state==0){
             System.out.println("已经支付");
             paymentStatus=0;  //已支付
+            payMoney=0;//价格
         }else if(state==1){
             System.out.println("没有支付");
+            payMoney=doctor.getPrice();  //支付金额
             paymentStatus=1;  //未支付
         }
 
@@ -134,7 +138,7 @@ public class HospitalController {
 
 
         //添加数据库  咨询表\订单表
-        Response f= hospitalService.addSecConsultation(doctor,userid,phone,biaoti,text,fix,paymentStatus,orderNum,state);
+        Response f= hospitalService.addSecConsultation(doctor,userid,phone,biaoti,text,fix,paymentStatus,orderNum,state,payMoney);
 
         if (photos.size() > 0) {
             for (int i = 0; i < photos.size(); i++) {

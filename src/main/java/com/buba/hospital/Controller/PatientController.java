@@ -2,8 +2,6 @@ package com.buba.hospital.Controller;
 
 import com.buba.hospital.Bean.*;
 import com.buba.hospital.Service.PatientService;
-import com.buba.hospital.utils.poiReadExcelInfo;
-import com.buba.hospital.utils.poiReadExcelInfo1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -49,7 +47,7 @@ public class PatientController {
     /*根据订单号数组返回相应的订单详情*/
     @RequestMapping("/payMentList")
     @ResponseBody
-    public  List<PayHoPatVO>  payMentList(Integer[] ids) {//用户id(获取session的id)
+    public  List<PayHoPatVO>  payMentList(String[] ids) {//用户id(获取session的id)
 
         List<PayHoPatVO> orderInfo = patientService.payMentList(ids);
         return  orderInfo;
@@ -65,7 +63,7 @@ public class PatientController {
     //修改门诊缴费状态
     @RequestMapping("/updateJiaofeiOrder")
     @ResponseBody
-    public boolean updateJiaofeiOrder(String payWay,Integer[] ids) {
+    public boolean updateJiaofeiOrder(String payWay,String[] ids) {
 
 
       boolean b = patientService.updateJiaofeiOrder(payWay,ids);
